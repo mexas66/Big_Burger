@@ -1,5 +1,7 @@
 package fr.greta.java.user.domain;
 
+import fr.greta.java.adress.domain.Adress;
+
 public class User {
     private int id;
     private String email;
