@@ -9,7 +9,7 @@ import java.util.List;
 public class Order {
     private int id;
     private int user_id;
-    private List<Burger> burgers = new ArrayList();
+    private List<Burger> burgers;
     private Calendar beginning;
     private Calendar end;
     private double total;
