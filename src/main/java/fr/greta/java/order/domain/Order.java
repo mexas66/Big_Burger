@@ -1,6 +1,7 @@
 package fr.greta.java.order.domain;
 
 import fr.greta.java.burger.domain.Burger;
+import fr.greta.java.user.domain.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class Order {
     private int id;
-    private int user_id;
+    private User user;
     private List<Burger> burgers;
     private Calendar beginning;
     private Calendar end;
@@ -22,12 +23,12 @@ public class Order {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser_id(User user) {
+        this.user = user;
     }
 
     public List<Burger> getBurgers() {
