@@ -7,6 +7,7 @@ public class User {
     private String email;
     private String password;
     private String firstname;
+    private String lastname;
     private String phone;
     private Address address;
 
@@ -42,19 +43,27 @@ public class User {
         this.firstname = firstname;
     }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Address getAdress() {
-        return address;
-    }
-
-    public void setAdress(Address address) {
-        this.address = address;
     }
 }

@@ -5,8 +5,9 @@ public class UserEntity {
     private String email;
     private String password;
     private String firstname;
+    private String lastname;
     private String phone;
-    private int adress_id;
+    private int address_id;
 
     public int getId() {
         return id;
@@ -40,6 +41,14 @@ public class UserEntity {
         this.firstname = firstname;
     }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -48,11 +57,11 @@ public class UserEntity {
         this.phone = phone;
     }
 
-    public int getAdress_id() {
-        return adress_id;
+    public int getAddress_id() {
+        return address_id;
     }
 
-    public void setAdress_id(int adress_id) {
-        this.adress_id = adress_id;
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 }
