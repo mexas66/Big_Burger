@@ -42,7 +42,7 @@ public class OrderWrapper {
         entity.setUser_id(model.getUser().getId());
         entity.setTotal(model.getTotal());
         entity.setBeginning(toTimestamp(model.getBeginning()));
-        entity.setBeginning(toTimestamp(model.getEnd()));
+        entity.setEnd(toTimestamp(model.getEnd()));
 
         List<Integer> burgers_id = new ArrayList();
 
