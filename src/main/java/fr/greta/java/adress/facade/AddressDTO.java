@@ -1,6 +1,6 @@
-package fr.greta.java.adress.domain;
+package fr.greta.java.adress.facade;
 
-public class Adress {
+public class AddressDTO {
     private String number;
     private String street;
     private String zipCode;

@@ -1,13 +1,13 @@
 package fr.greta.java.user.facade;
 
-import fr.greta.java.adress.facade.AdressDTO;
+import fr.greta.java.adress.facade.AddressDTO;
 
 public class UserDTO {
     private int id;
     private String email;
     private String firstname;
     private String phone;
-    private AdressDTO adressDTO;
+    private AddressDTO addressDTO;
 
     public int getId() {
         return id;
@@ -43,11 +43,11 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public AdressDTO getAdressDTO() {
-        return adressDTO;
+    public AddressDTO getAdressDTO() {
+        return addressDTO;
     }
 
-    public void setAdressDTO(AdressDTO adressDTO) {
-        this.adressDTO = adressDTO;
+    public void setAdressDTO(AddressDTO addressDTO) {
+        this.addressDTO = addressDTO;
     }
 }

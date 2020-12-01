@@ -1,6 +1,6 @@
 package fr.greta.java.user.domain;
 
-import fr.greta.java.adress.domain.Adress;
+import fr.greta.java.adress.domain.Address;
 
 public class User {
     private int id;
@@ -8,7 +8,7 @@ public class User {
     private String password;
     private String firstname;
     private String phone;
-    private Adress adress;
+    private Address address;
 
     public int getId() {
         return id;
@@ -50,11 +50,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAdress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAdress(Address address) {
+        this.address = address;
     }
 }

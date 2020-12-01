@@ -1,10 +1,19 @@
-package fr.greta.java.adress.facade;
+package fr.greta.java.adress.domain;
 
-public class AdressDTO {
+public class Address {
+    private int id;
     private String number;
     private String street;
     private String zipCode;
     private String city;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;

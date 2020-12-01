@@ -1,10 +1,19 @@
 package fr.greta.java.adress.persistance;
 
-public class AdressEntity {
+public class AddressEntity {
+    private int id;
     private String number;
     private String street;
     private String zipCode;
     private String city;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;

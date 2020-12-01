@@ -1,7 +1,5 @@
 package fr.greta.java.user.persistance;
 
-import fr.greta.java.adress.domain.Adress;
-
 public class UserEntity {
     private int id;
     private String email;
