@@ -1,11 +1,12 @@
 package fr.greta.java.user.domain;
 
 import fr.greta.java.adress.domain.Address;
+import fr.greta.java.adress.domain.AddressService;
 import fr.greta.java.user.persistance.UserEntity;
 
 public class UserWrapper {
 
-    UserService service = new UserService();
+    AddressService addressService = new AddressService();
 
     public User fromEntity(UserEntity entity){
         User model = new User();
@@ -16,7 +17,7 @@ public class UserWrapper {
         model.setPassword(entity.getPassword());
         model.setPhone(entity.getPhone());
 
-        Address address = service.getAddressById(entity.getAddress_id());
+        Address address = addressService.findById(entity.getAddress_id());
         model.setAddress(address);
 
         return model;

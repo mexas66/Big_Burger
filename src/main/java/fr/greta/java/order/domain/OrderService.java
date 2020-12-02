@@ -1,5 +1,6 @@
 package fr.greta.java.order.domain;
 
+import fr.greta.java.ConnectionFactory;
 import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.domain.BurgerService;
 import fr.greta.java.generic.exception.RepositoryException;
@@ -13,15 +14,17 @@ public class OrderService {
 
     private BurgerService burgerService = new BurgerService();
     private UserService userService = new UserService();
-    private OrderWrapper wrapper = new OrderWrapper();
+    private OrderWrapper wrapper;
     private OrderRepository repository;
 
-    public User getUserById(int user_id) {
-        return userService.findById(user_id);
+    public OrderService(OrderWrapper wrapper, OrderRepository repository) {
+        this.wrapper = wrapper;
+        this.repository = repository;
     }
 
-    public Burger getBurgerById(int burger_id) {
-        return burgerService.findById(burger_id);
+    public OrderService(){
+        repository = new OrderRepository();
+        wrapper = new OrderWrapper();
     }
 
     public Order create(Order order) throws ServiceException {

@@ -10,10 +10,6 @@ public class UserService {
     UserWrapper wrapper = new UserWrapper();
     UserRepository repository = new UserRepository();
 
-    public Address getAddressById(int address_id) {
-        return addressService.findById(address_id);
-    }
-
     public User findById(int user_id) {
         return wrapper.fromEntity(repository.findById(user_id));
     }

@@ -1,7 +1,9 @@
 package fr.greta.java.order.domain;
 
 import fr.greta.java.burger.domain.Burger;
+import fr.greta.java.burger.domain.BurgerService;
 import fr.greta.java.order.persistance.OrderEntity;
+import fr.greta.java.user.domain.UserService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,14 +13,15 @@ import java.util.List;
 
 public class OrderWrapper {
 
-    OrderService service = new OrderService();
+    UserService userService = new UserService();
+    BurgerService burgerService = new BurgerService();
 
 
     public Order fromEntity(OrderEntity entity){
         Order model = new Order();
         model.setId(entity.getId());
         model.setTotal(entity.getTotal());
-        model.setUser(service.getUserById(entity.getUser_id()));
+        model.setUser(userService.findById(entity.getUser_id()));
 
         model.setBeginning(toCalendar(entity.getBeginning()));
         model.setEnd(toCalendar(entity.getEnd()));
@@ -26,7 +29,7 @@ public class OrderWrapper {
         List<Burger> burgers = new ArrayList();
 
         for(int burger_id : entity.getBurgersId()){
-            burgers.add(service.getBurgerById(burger_id));
+            burgers.add(burgerService.findById(burger_id));
         }
 
         model.setBurgers(burgers);
