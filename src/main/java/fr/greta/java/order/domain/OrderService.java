@@ -8,6 +8,8 @@ import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.persistance.OrderRepository;
 import fr.greta.java.user.domain.User;
 import fr.greta.java.user.domain.UserService;
+import fr.greta.java.user.domain.UserWrapper;
+import fr.greta.java.user.persistance.UserRepository;
 
 
 public class OrderService {
@@ -23,8 +25,8 @@ public class OrderService {
     }
 
     public OrderService(){
+        wrapper= new OrderWrapper();
         repository = new OrderRepository();
-        wrapper = new OrderWrapper();
     }
 
     public Order create(Order order) throws ServiceException {

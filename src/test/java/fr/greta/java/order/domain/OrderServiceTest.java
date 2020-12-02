@@ -17,7 +17,7 @@ public class OrderServiceTest {
     OrderService service = new OrderService(wrapper, repository);
 
     @Test
-    public void createCorrectly() throws ServiceException, RepositoryException {
+    public void createSuccessfully() throws ServiceException, RepositoryException {
         Order order = mock(Order.class);
         OrderEntity orderEntity = mock(OrderEntity.class);
 
