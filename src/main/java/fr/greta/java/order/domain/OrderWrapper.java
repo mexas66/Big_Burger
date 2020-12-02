@@ -1,20 +1,18 @@
 package fr.greta.java.order.domain;
 
 import fr.greta.java.burger.domain.Burger;
-import fr.greta.java.burger.domain.BurgerWrapper;
-import fr.greta.java.burger.persistance.BurgerEntity;
 import fr.greta.java.order.persistance.OrderEntity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class OrderWrapper {
 
     OrderService service = new OrderService();
 
-    BurgerWrapper burgerWrapper = new BurgerWrapper();
 
     public Order fromEntity(OrderEntity entity){
         Order model = new Order();
@@ -57,13 +55,16 @@ public class OrderWrapper {
 
 
     private Timestamp toTimestamp(Calendar calendar){
-        //TODO
-        return null;
+        Date date = calendar.getTime();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        return timestamp;
     }
 
 
-    private Calendar toCalendar(Timestamp time) {
-        //TODO
-        return null;
+    private Calendar toCalendar(Timestamp timestamp) {
+        Date date = new Date(timestamp.getTime());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
     }
 }
