@@ -19,8 +19,12 @@ public class UserService {
         repository = new UserRepository();
     }
 
-    public User findById(int user_id) {
-        return wrapper.fromEntity(repository.findById(user_id));
+    public User findById(int user_id) throws ServiceException {
+        try {
+            return wrapper.fromEntity(repository.findById(user_id));
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
     }
 
 

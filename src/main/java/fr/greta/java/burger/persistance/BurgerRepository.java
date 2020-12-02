@@ -2,6 +2,7 @@ package fr.greta.java.burger.persistance;
 
 import fr.greta.java.ConnectionFactory;
 import fr.greta.java.generic.exception.RepositoryException;
+import fr.greta.java.generic.tools.JdbcTool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,6 +35,8 @@ public class BurgerRepository {
 
         }catch(SQLException | ClassNotFoundException e) {
             throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_ID, e);
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
         }
 
     }
