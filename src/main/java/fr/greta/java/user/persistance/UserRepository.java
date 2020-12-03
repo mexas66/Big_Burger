@@ -3,7 +3,6 @@ package fr.greta.java.user.persistance;
 import fr.greta.java.ConnectionFactory;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
-import fr.greta.java.user.domain.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +13,8 @@ public class UserRepository {
 
     private ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_REQUEST = "INSERT into _user(_email, _firstname, _lastname, _phone, address_id)"+
-            " VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_REQUEST = "INSERT into _user(_email, _ password, _firstname, _lastname, _phone, address_id)"+
+            " VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_REQUEST = "SELECT id, _email, _firstname, _lastname, _phone, address_id";
     private static final String WHERE_ID = " WHERE id = ?";
 
@@ -54,10 +53,11 @@ public class UserRepository {
             conn = connectionFactory.create();
             statement = conn.prepareStatement(INSERT_REQUEST, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, userEntity.getEmail());
-            statement.setString(2, userEntity.getFirstname());
-            statement.setString(3, userEntity.getLastname());
-            statement.setString(4, userEntity.getPhone());
-            statement.setInt(5, userEntity.getAddress_id());
+            statement.setString(2, userEntity.getPassword());
+            statement.setString(3, userEntity.getFirstname());
+            statement.setString(4, userEntity.getLastname());
+            statement.setString(5, userEntity.getPhone());
+            statement.setInt(6, userEntity.getAddress_id());
 
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
