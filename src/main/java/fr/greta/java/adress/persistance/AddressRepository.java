@@ -16,6 +16,8 @@ public class AddressRepository {
 
     private static final String INSERT_INTO = "INSERT INTO _address (_number, _street, _zipcode, _city)" +
             "VALUES(?, ?, ?, ?)";
+    private static final String SELECT_FROM = "SELECT id, _number, _street, _zipcode, _city FROM address";
+    private static final String WHERE_ID = " WHERE id = ?";
 
     public AddressEntity create(AddressEntity entity) throws RepositoryException {
         Connection conn = null;
@@ -46,5 +48,39 @@ public class AddressRepository {
             JdbcTool.close(conn, statement, resultSet);
         }
 
+    }
+
+    public AddressEntity findById(int address_id) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            conn = connectionFactory.create();
+            statement= conn.prepareStatement(SELECT_FROM+WHERE_ID);
+            statement.setInt(1, address_id);
+            resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return toEntity(resultSet);
+            }else {
+                throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_FROM + WHERE_ID);
+            }
+
+        }catch(SQLException | ClassNotFoundException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_FROM + WHERE_ID, e);
+        }
+
+    }
+
+    private AddressEntity toEntity(ResultSet resultSet) throws SQLException {
+        AddressEntity entity = new AddressEntity();
+        entity.setId(resultSet.getInt("id"));
+        entity.setNumber(resultSet.getString("_number"));
+        entity.setStreet(resultSet.getString("_street"));
+        entity.setZipCode(resultSet.getString("_zipcode"));
+        entity.setCity(resultSet.getString("_city"));
+
+        return entity;
     }
 }
