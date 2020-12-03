@@ -18,6 +18,7 @@ public class OrderRepository {
 
     private static final String INSERT_INTO="INSERT INTO _order (user_id, _beginning, _end, _total)" +
             "VALUES(?, ?, ?, ?)";
+    private static final String SELECT_REQUEST="SELECT id, user_id, _beginning, _end, _total FROM _order WHERE id = ?";
     private static final String SELECT_REQUEST_ORDER_ITEMS= "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
 
 
@@ -51,6 +52,42 @@ public class OrderRepository {
         }
     }
 
+
+    public OrderEntity findById(int order_id) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            conn = connectionFactory.create();
+            statement= conn.prepareStatement(SELECT_REQUEST);
+            statement.setInt(1, order_id);
+            resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return toEntity(resultSet);
+            }else{
+                throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST);
+            }
+        }catch(SQLException | ClassNotFoundException | RepositoryException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST, e);
+        }
+    }
+
+    private OrderEntity toEntity(ResultSet resultSet) throws SQLException, RepositoryException {
+
+        OrderEntity entity = new OrderEntity();
+        entity.setId(resultSet.getInt("id"));
+        entity.setBurgerEntities(getOrderItems(resultSet.getInt("id")));
+        entity.setBeginning(resultSet.getTimestamp("_beginning"));
+        entity.setEnd(resultSet.getTimestamp("_end"));
+        entity.setUser_id(resultSet.getInt("user_id"));
+        entity.setTotal(resultSet.getDouble("_total"));
+
+        return entity;
+    }
+
+
     public List<Integer> getOrderItems(int order_id) throws RepositoryException {
 
         List<Integer> burger_id = new ArrayList();
@@ -81,5 +118,6 @@ public class OrderRepository {
             JdbcTool.close(conn,statement,resultSet);
         }
     }
+
 
 }

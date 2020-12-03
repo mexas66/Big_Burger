@@ -2,6 +2,7 @@ package fr.greta.java.order.domain;
 
 import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.domain.BurgerService;
+import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.persistance.OrderEntity;
 import fr.greta.java.user.domain.UserService;
 
@@ -17,7 +18,7 @@ public class OrderWrapper {
     BurgerService burgerService = new BurgerService();
 
 
-    public Order fromEntity(OrderEntity entity){
+    public Order fromEntity(OrderEntity entity) throws ServiceException {
         Order model = new Order();
         model.setId(entity.getId());
         model.setTotal(entity.getTotal());
