@@ -13,4 +13,52 @@ public class OrderDTO {
     private Date beginning;
     private Date end;
     private double total;
+
+    public List<BurgerDTO> getBurgerDTOs() {
+        return burgerDTOs;
+    }
+
+    public void setBurgerDTOs(List<BurgerDTO> burgerDTOs) {
+        this.burgerDTOs = burgerDTOs;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
+
+    public Date getBeginning() {
+        return beginning;
+    }
+
+    public void setBeginning(Date beginning) {
+        this.beginning = beginning;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

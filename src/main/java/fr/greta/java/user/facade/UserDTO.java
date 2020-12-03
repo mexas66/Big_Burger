@@ -6,6 +6,7 @@ public class UserDTO {
     private int id;
     private String email;
     private String firstname;
+    private String lastname;
     private String phone;
     private AddressDTO addressDTO;
 
@@ -37,6 +38,22 @@ public class UserDTO {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public AddressDTO getAddressDTO() {
+        return addressDTO;
+    }
+
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addressDTO = addressDTO;
     }
 
     public void setPhone(String phone) {
