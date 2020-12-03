@@ -4,7 +4,6 @@ import fr.greta.java.ConnectionFactory;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,6 +70,8 @@ public class OrderRepository {
             }
         }catch(SQLException | ClassNotFoundException | RepositoryException e){
             throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST, e);
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
         }
     }
 

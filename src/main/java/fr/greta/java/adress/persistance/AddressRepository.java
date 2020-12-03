@@ -69,6 +69,8 @@ public class AddressRepository {
 
         }catch(SQLException | ClassNotFoundException e){
             throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_FROM + WHERE_ID, e);
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
         }
 
     }
