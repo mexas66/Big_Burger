@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body>
+<form action="register" method="post">
+
+    <fieldset class="User">
+        <label for="Lastname">Lastname</label>
+        <input id="Lastname" name="Lastname" type="text" /><br />
+        <label for="Firstname">Firstname </label>
+        <input id="Firstname" name="Firstname" type="text" /><br />
+    </fieldset>
+
+    <fieldset class="address">
+        <legend>Address</legend>
+        <label>street</label>
+        <input id="street" name="street" type="text" /><br />
+        <label>Zipcode</label>
+        <input id="zipcode" name="zipcode" type="text" /><br />
+        <label>Ville</label>
+        <input id="ville" name="ville" type="text" />
+    </fieldset>
+
+    <button onclick="alert(this.value)">Valider</button>
+
+</form>
+</body>
+</html>
