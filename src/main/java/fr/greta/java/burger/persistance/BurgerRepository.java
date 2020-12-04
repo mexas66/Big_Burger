@@ -4,10 +4,9 @@ import fr.greta.java.ConnectionFactory;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BurgerRepository {
 
@@ -55,4 +54,26 @@ public class BurgerRepository {
     }
 
 
+    public List<BurgerEntity> getAll() throws RepositoryException {
+        List<BurgerEntity> entities = new ArrayList();
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            conn = connectionFactory.create();
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(SELECT_REQUEST);
+
+            while(resultSet.next()){
+                entities.add(toEntity(resultSet));
+            }
+
+            return entities;
+        }catch (SQLException | ClassNotFoundException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST, e);
+        }finally{
+            JdbcTool.close(conn,statement,resultSet);
+        }
+    }
 }

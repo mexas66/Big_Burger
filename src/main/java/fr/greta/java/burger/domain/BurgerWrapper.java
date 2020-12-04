@@ -2,6 +2,9 @@ package fr.greta.java.burger.domain;
 
 import fr.greta.java.burger.persistance.BurgerEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BurgerWrapper {
     public Burger fromEntity(BurgerEntity entity){
         Burger model = new Burger();
@@ -21,4 +24,11 @@ public class BurgerWrapper {
         return entity;
     }
 
+    public List<Burger> fromEntities(List<BurgerEntity> entities) {
+        List<Burger> models = new ArrayList();
+        for(BurgerEntity entity:entities){
+            models.add(fromEntity(entity));
+        }
+        return models;
+    }
 }
