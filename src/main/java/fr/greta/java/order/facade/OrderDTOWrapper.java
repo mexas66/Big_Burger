@@ -11,7 +11,6 @@ import java.util.List;
 
 
 public class OrderDTOWrapper {
-    private UserDTOWrapper userDTOWrapper = new UserDTOWrapper();
     private BurgerDTOWrapper burgerDTOWrapper = new BurgerDTOWrapper();
 
     public OrderDTO toDTO(Order model){
@@ -19,7 +18,6 @@ public class OrderDTOWrapper {
         dto.setId(model.getId());
         dto.setBeginning(model.getBeginning().getTime());
         dto.setEnd(model.getEnd().getTime());
-        dto.setUserDTO(userDTOWrapper.toDTO(model.getUser()));
         dto.setTotal(model.getTotal());
 
         List<BurgerDTO> burgersDTO = new ArrayList();
