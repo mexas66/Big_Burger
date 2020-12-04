@@ -2,13 +2,14 @@ package fr.greta.java.user.domain;
 
 import fr.greta.java.adress.domain.Address;
 import fr.greta.java.adress.domain.AddressService;
+import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.user.persistance.UserEntity;
 
 public class UserWrapper {
 
     AddressService addressService = new AddressService();
 
-    public User fromEntity(UserEntity entity){
+    public User fromEntity(UserEntity entity) throws ServiceException {
         User model = new User();
         model.setId(entity.getId());
         model.setEmail(entity.getEmail());
