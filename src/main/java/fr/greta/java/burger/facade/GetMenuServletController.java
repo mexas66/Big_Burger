@@ -4,7 +4,10 @@ import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.domain.BurgerService;
 import fr.greta.java.generic.exception.ServiceException;
 
+<<<<<<< HEAD
 import javax.servlet.RequestDispatcher;
+=======
+>>>>>>> Added GetMenu Servlet
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
