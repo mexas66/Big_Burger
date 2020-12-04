@@ -36,4 +36,12 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+
+    public User findUser(String login, String password) throws ServiceException {
+        try {
+            return wrapper.fromEntity(repository.findUser(login,password));
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

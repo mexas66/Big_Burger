@@ -17,6 +17,7 @@ public class UserRepository {
             " VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_REQUEST = "SELECT id, _email, _firstname, _lastname, _phone, address_id";
     private static final String WHERE_ID = " WHERE id = ?";
+    private static final String WHERE_EMAIL_PASSWORD=" WHERE _email = ? AND _password = ?";
 
     public UserEntity findById(int user_id) throws RepositoryException {
         Connection conn = null;
@@ -93,4 +94,27 @@ public class UserRepository {
         return entity;
     }
 
+    public UserEntity findUser(String login, String password) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            conn = connectionFactory.create();
+            statement = conn.prepareStatement(SELECT_REQUEST+WHERE_EMAIL_PASSWORD);
+            statement.setString(1,login);
+            statement.setString(2,password);
+            resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return toEntity(resultSet);
+            }else{
+                throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_EMAIL_PASSWORD);
+            }
+        }catch(SQLException | ClassNotFoundException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_EMAIL_PASSWORD, e);
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
+        }
+    }
 }
