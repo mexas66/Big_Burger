@@ -2,7 +2,6 @@ package fr.greta.java.user.facade;
 
 import fr.greta.java.adress.domain.Address;
 import fr.greta.java.adress.domain.AddressService;
-import fr.greta.java.adress.persistance.AddressRepository;
 import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.user.domain.User;
 import fr.greta.java.user.domain.UserService;
@@ -16,6 +15,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns="/register")
 public class RegisterUserServletController extends HttpServlet {
+
     private AddressService addressService= new AddressService();
     private UserService service = new UserService();
 
@@ -36,7 +36,7 @@ public class RegisterUserServletController extends HttpServlet {
             user.setLastname(req.getParameter("lastname"));
             user.setEmail(req.getParameter("email"));
             user.setPassword(req.getParameter("password"));
-            user.setPhone("phone");
+            user.setPhone(req.getParameter("phone"));
 
             service.create(user);
 

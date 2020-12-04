@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Inscription</title>
 </head>
-<body>
+<body style="text-align:center">
 <form action="register" method="post">
 
     <fieldset class="User">
@@ -15,15 +15,24 @@
 
     </fieldset>
 
-    <fieldset class="address">
-        <legend>Address</legend>
+        <label>Number</label>
+        <input id="number" name="number" type="text" required/><br />
         <label>street</label>
-        <input id="street" name="street" type="text" /><br />
+        <input id="street" name="street" type="text" required/><br />
         <label>Zipcode</label>
-        <input id="zipcode" name="zipcode" type="text" /><br />
-        <label>Ville</label>
-        <input id="city" name="city" type="text" />
-    </fieldset>
+        <input id="zipcode" name="zipcode" type="text" required/><br />
+        <label>City</label>
+        <input id="city" name="city" type="text" required/><br/>
+
+    <label for="phone">Phone</label>
+    <input id="phone" name="phone" type="text" required/><br/>
+
+        <label for="email">Mail</label>
+        <input id="email" name="email" type="text" required/><br/>
+        <label for="mdp">Password</label>
+        <input id="mdp" name="mdp" type="text" required/><br/>
+
+
 
     <button onclick="alert(this.value)">Valider</button>
 

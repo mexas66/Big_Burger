@@ -17,6 +17,7 @@ public class AddressWrapper {
 
     public AddressEntity toEntity(Address model){
         AddressEntity entity = new AddressEntity();
+
         entity.setId(model.getId());
         entity.setNumber(model.getNumber());
         entity.setStreet(model.getStreet());
