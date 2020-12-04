@@ -45,6 +45,8 @@ public class AddOrderServletController extends HttpServlet {
 
             order.setBurgers(burgers);
 
+            order.setBurgers(burgers);
+
             session.setAttribute("order", order);
 
             RequestDispatcher dispatch = req.getRequestDispatcher("/menu");
