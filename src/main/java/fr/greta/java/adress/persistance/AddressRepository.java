@@ -16,7 +16,7 @@ public class AddressRepository {
 
     private static final String INSERT_INTO = "INSERT INTO _address (_number, _street, _zipcode, _city)" +
             "VALUES(?, ?, ?, ?)";
-    private static final String SELECT_FROM = "SELECT id, _number, _street, _zipcode, _city FROM address";
+    private static final String SELECT_FROM = "SELECT id, _number, _street, _zipcode, _city FROM _address";
     private static final String WHERE_ID = " WHERE id = ?";
 
     public AddressEntity create(AddressEntity entity) throws RepositoryException {

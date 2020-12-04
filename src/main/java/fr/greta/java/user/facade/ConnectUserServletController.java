@@ -1,5 +1,6 @@
 package fr.greta.java.user.facade;
 
+import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.user.domain.User;
 import fr.greta.java.user.domain.UserService;
 
@@ -18,14 +19,19 @@ public class ConnectUserServletController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = service.findUser(req.getParameter("login"), req.getParameter("password"));
-        if(user != null){
-            HttpSession session = req.getSession();
-            session.setAttribute("currentuser", user);
+        try {
+            User user = service.findUser(req.getParameter("login"), req.getParameter("password"));
 
-            resp.sendRedirect(req.getContextPath()+"/accueil?message=CONNECT_SUCCESS");
+            if (user != null) {
+                HttpSession session = req.getSession();
+                session.setAttribute("currentuser", user);
+
+                resp.sendRedirect(req.getContextPath() + "/accueil?message=CONNECT_SUCCESS");
+            }
+            resp.sendRedirect(req.getContextPath() + "/connect?message=CONNECT_ERROR");
+        }catch (ServiceException e){
+            e.printStackTrace();
+            resp.sendRedirect(req.getContextPath() + "/connect?message=CONNECT_ERROR");
         }
-        resp.sendRedirect(req.getContextPath()+"/connect?message=CONNECT_ERROR");
-
     }
 }
