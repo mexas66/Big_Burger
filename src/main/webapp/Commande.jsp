@@ -13,28 +13,33 @@
 
 
 
-<FORM>
-    <h4 style="text-align:center;font-family:cursive;font-size:80px">Le Classique</h4>
-
-<p style="text-align:center;font-size:30px"><i>Pain, sauce, salade, oignons, cornichons, fromage, tomates, steacks</i></p>
-    <img src="https://www.fastnfood-ivry.fr/63-344-thickbox/double-cheese-burger.jpg" style="border:solid 5px" width="270" height="270"> <p style="font-size:30px"><B>Prix :</B> 6.50 €</p>
-
-    <label style="font-size:30px">Quantité désirée:</label>
-
-    <SELECT name="nom" size="1" style="font-size:20px">
-        <OPTION>1
-        <OPTION>2
-        <OPTION>3
-        <OPTION>4
-        <OPTION>5
-        <OPTION>6
-        <OPTION>7
-        <OPTION>8
-        <OPTION>9
-        <OPTION>10
-    </SELECT>
-    <button onclick="alert(this.value)" style="background-color:#6ca302;color:#5b3500"><B>Valider</B></button>
-
-</FORM>
+<form>
+ <table>
+     <thead>
+         <th>Nom du Burger</th>
+         <th>Prix</th>
+         <th>Quantité</th>
+         <th>Ajouter à la commande</th>
+     </thead>
+     <tbody>
+         <c:forEach items="${requestScope.burgers}" var="burger">
+             <tr>
+                 <td>
+                     <c:out value="${burger.label}" />
+                 </td>
+                 <td>
+                     <c:out value="${burger.price}" />€
+                 </td>
+                <td>
+                    <input type="number" name="to_add">
+                </td>
+                <td>
+                    <button type="submit" name="submit">Ajouter</button>
+                </td>
+             </tr>
+         </c:forEach>
+     </tbody>
+ </table>
+ </form>
 </body>
 </html>

@@ -4,6 +4,7 @@ import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.domain.BurgerService;
 import fr.greta.java.generic.exception.ServiceException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,8 @@ public class GetMenuServletController extends HttpServlet {
             List<Burger> burgers = service.getAllBurgers();
             req.setAttribute("burgers", dtoWrapper.toDTOs(burgers));
 
-            resp.sendRedirect(req.getContextPath()+"/menu.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("Commande.jsp");
+            dispatcher.forward(req,resp);
         } catch (ServiceException e) {
             e.printStackTrace();
             resp.sendRedirect(req.getContextPath()+"/accueil?message=REGISTER_ERROR");
