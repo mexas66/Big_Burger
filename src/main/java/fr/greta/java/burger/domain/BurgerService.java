@@ -4,6 +4,9 @@ import fr.greta.java.burger.persistance.BurgerRepository;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.exception.ServiceException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BurgerService {
     BurgerRepository repository = new BurgerRepository();
     BurgerWrapper wrapper = new BurgerWrapper();
@@ -14,5 +17,14 @@ public class BurgerService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
+    }
+
+    public List<Burger> getAllBurgers() throws ServiceException {
+        try {
+            return wrapper.fromEntities(repository.getAll());
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+
     }
 }
