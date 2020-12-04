@@ -33,7 +33,7 @@ public class AddOrderServletController extends HttpServlet {
                 order = new Order();
                 order.setBurgers(new ArrayList());
                 order.setTotal(0);
-                order.setUser((User)session.getAttribute("user"));
+                order.setUser((User)session.getAttribute("usercurrent"));
             }
 
             List<Burger> burgers = order.getBurgers();
@@ -42,6 +42,8 @@ public class AddOrderServletController extends HttpServlet {
                 burgers.add(burger);
                 order.setTotal(order.getTotal()+burger.getPrice());
             }
+
+            order.setBurgers(burgers);
 
             session.setAttribute("order", order);
 
