@@ -3,14 +3,13 @@ package fr.greta.java.order.domain;
 import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.user.domain.User;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Map;
 
 public class Order {
     private int id;
     private User user;
-    private List<Burger> burgers;
+    private Map<Burger, Integer> burgers;
     private Calendar beginning;
     private Calendar end;
     private double total;
@@ -31,11 +30,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<Burger> getBurgers() {
+    public Map<Burger, Integer> getBurgers() {
         return burgers;
     }
 
-    public void setBurgers(List<Burger> burgers) {
+    public void setBurgers(Map<Burger, Integer> burgers) {
         this.burgers = burgers;
     }
 

@@ -5,19 +5,20 @@ import fr.greta.java.user.facade.UserDTO;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDTO {
-    private List<BurgerDTO> burgerDTOs;
+    private Map<BurgerDTO,Integer> burgerDTOs;
     private int id;
     private Date beginning;
     private Date end;
     private double total;
 
-    public List<BurgerDTO> getBurgerDTOs() {
+    public Map<BurgerDTO, Integer> getBurgerDTOs() {
         return burgerDTOs;
     }
 
-    public void setBurgerDTOs(List<BurgerDTO> burgerDTOs) {
+    public void setBurgerDTOs(Map<BurgerDTO, Integer> burgerDTOs) {
         this.burgerDTOs = burgerDTOs;
     }
 

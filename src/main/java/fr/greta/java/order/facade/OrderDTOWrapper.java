@@ -4,10 +4,9 @@ import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.facade.BurgerDTO;
 import fr.greta.java.burger.facade.BurgerDTOWrapper;
 import fr.greta.java.order.domain.Order;
-import fr.greta.java.user.facade.UserDTOWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class OrderDTOWrapper {
@@ -20,10 +19,10 @@ public class OrderDTOWrapper {
         dto.setEnd(model.getEnd().getTime());
         dto.setTotal(model.getTotal());
 
-        List<BurgerDTO> burgersDTO = new ArrayList();
+        Map<BurgerDTO, Integer> burgersDTO = new HashMap<BurgerDTO, Integer>();
 
-        for(Burger burger : model.getBurgers()){
-            burgersDTO.add(burgerDTOWrapper.toDTO(burger));
+        for(Burger burger : model.getBurgers().keySet()){
+            burgersDTO.put(burgerDTOWrapper.toDTO(burger), model.getBurgers().get(burger));
         }
 
         dto.setBurgerDTOs(burgersDTO);

@@ -1,14 +1,13 @@
 package fr.greta.java.order.persistance;
 
-import fr.greta.java.burger.persistance.BurgerEntity;
-
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class OrderEntity {
     private int id;
     private int user_id;
-    private List<Integer> burgers_id;
+    private Map<Integer, Integer> burgers_id;
     private Timestamp beginning;
     private Timestamp end;
     private double total;
@@ -29,11 +28,11 @@ public class OrderEntity {
         this.user_id = user_id;
     }
 
-    public List<Integer> getBurgersId() {
+    public Map<Integer, Integer> getBurgersId() {
         return burgers_id;
     }
 
-    public void setBurgerEntities(List<Integer> burgers_id) {
+    public void setBurgerEntities(Map<Integer, Integer> burgerEntities) {
         this.burgers_id = burgers_id;
     }
 

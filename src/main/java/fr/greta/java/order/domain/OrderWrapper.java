@@ -7,10 +7,7 @@ import fr.greta.java.order.persistance.OrderEntity;
 import fr.greta.java.user.domain.UserService;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class OrderWrapper {
 
@@ -27,10 +24,10 @@ public class OrderWrapper {
         model.setBeginning(toCalendar(entity.getBeginning()));
         model.setEnd(toCalendar(entity.getEnd()));
 
-        List<Burger> burgers = new ArrayList();
+        Map<Burger, Integer> burgers = new HashMap<Burger, Integer>();
 
-        for(int burger_id : entity.getBurgersId()){
-            burgers.add(burgerService.findById(burger_id));
+        for(int burger_id : entity.getBurgersId().keySet()){
+            burgers.put(burgerService.findById(burger_id),entity.getBurgersId().get(burger_id));
         }
 
         model.setBurgers(burgers);
@@ -46,11 +43,13 @@ public class OrderWrapper {
         entity.setBeginning(toTimestamp(model.getBeginning()));
         entity.setEnd(toTimestamp(model.getEnd()));
 
-        List<Integer> burgers_id = new ArrayList();
+        Map<Integer, Integer> burgers_id = new HashMap<Integer, Integer>();
 
-        for(Burger burger : model.getBurgers()){
-            burgers_id.add(burger.getId());
+        for(Burger burger: model.getBurgers().keySet()){
+            burgers_id.put(burger.getId(), model.getBurgers().get(burger));
         }
+
+        entity.setBurgerEntities(burgers_id);
 
         return entity;
     }
