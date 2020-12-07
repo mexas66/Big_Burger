@@ -1,6 +1,7 @@
 package fr.greta.java.order.persistance;
 
 import fr.greta.java.ConnectionFactory;
+import fr.greta.java.burger.persistance.BurgerEntity;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
@@ -9,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderRepository {
 
@@ -89,9 +92,9 @@ public class OrderRepository {
     }
 
 
-    public List<Integer> getOrderItems(int order_id) throws RepositoryException {
+    public Map<Integer, Integer> getOrderItems(int order_id) throws RepositoryException {
 
-        List<Integer> burger_id = new ArrayList();
+        Map<Integer, Integer> burgers_id = new HashMap<Integer, Integer>();
 
         Connection conn = null;
         PreparedStatement statement = null;
@@ -106,13 +109,10 @@ public class OrderRepository {
 
 
             while (resultSet.next()){
-
-                for(int i=0; i < resultSet.getInt("_quantity");i++){
-                    burger_id.add(resultSet.getInt("burger_id"));
-                }
-
+                burgers_id.put(resultSet.getInt("burger_id"),resultSet.getInt("_quantity"));
             }
-            return burger_id;
+
+            return burgers_id;
         } catch(SQLException | ClassNotFoundException e){
             throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST_ORDER_ITEMS, e);
         }finally{
