@@ -31,7 +31,7 @@
                      <c:out value="${burger.price}" />€
                  </td>
                 <td>
-                    <input type="number" name="to_add">
+                    <input type="number" min="1" name="to_add">
                 </td>
                 <td>
                     <button type="submit" name="submit">Ajouter</button>

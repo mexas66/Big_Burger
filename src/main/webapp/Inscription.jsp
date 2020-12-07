@@ -46,14 +46,14 @@
     <br/>
     <br/>
     <br/>
-        <label for="mail"><B>Mail</B></label>
-        <input id="mail" name="mail" type="text" required/><br/>
+        <label for="email"><B>Mail</B></label>
+        <input id="email" name="email" type="text" required/><br/>
     <br/>
-        <label for="mdp"><B>Mot de passe</B></label>
-        <input id="mdp" name="mdp" type="text" required/><br/>
+        <label for="password"><B>Mot de passe</B></label>
+        <input id="password" name="password" type="password" required/><br/>
     <br/>
 
-    <button onclick="alert(this.value)" style="background-color:#bbd2e1;color:#5b3500"><B>Valider</B></button>
+    <button type="submit" name="submit" style="background-color:#bbd2e1;color:#5b3500"><B>Valider</B></button>
 
 </form>
 </body>
