@@ -6,6 +6,7 @@ import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.domain.Order;
 import fr.greta.java.user.domain.User;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet
 public class AddOrderServletController extends HttpServlet {
@@ -31,21 +34,21 @@ public class AddOrderServletController extends HttpServlet {
 
             if(order == null){
                 order = new Order();
-                order.setBurgers(new ArrayList());
+                order.setBurgers(new HashMap<Burger, Integer>());
                 order.setTotal(0);
                 order.setUser((User)session.getAttribute("usercurrent"));
             }
 
-            List<Burger> burgers = order.getBurgers();
+            Map<Burger, Integer> burgers = order.getBurgers();
 
-            for(int i = 0; i < Integer.parseInt(req.getParameter("to_add")); i++){
-                burgers.add(burger);
-                order.setTotal(order.getTotal()+burger.getPrice());
-            }
+            burgers.put(burger, Integer.parseInt(req.getParameter("to_add")));
 
             order.setBurgers(burgers);
 
             session.setAttribute("order", order);
+
+            RequestDispatcher dispatch = req.getRequestDispatcher("/menu");
+            dispatch.forward(req, resp);
 
 
         } catch (ServiceException e) {
