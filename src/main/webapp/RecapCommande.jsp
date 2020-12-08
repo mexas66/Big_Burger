@@ -20,6 +20,7 @@
          <th>Nom du Burger</th>
          <th>Prix</th>
          <th>Quantité</th>
+         <th>Total</th>
  </thead>
  <tbody>
          <c:forEach items="${order.burgerDTOs}" var="burger">
