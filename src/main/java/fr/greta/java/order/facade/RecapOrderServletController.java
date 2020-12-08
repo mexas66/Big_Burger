@@ -30,7 +30,7 @@ public class RecapOrderServletController extends HttpServlet {
 
 
         try {
-        Burger burger = burgerService.findById(Integer.parseInt(req.getParameter("burger_id")));
+            Burger burger = burgerService.findById(Integer.parseInt(req.getParameter("burger_id")));
 
             if(order == null){
                 order = new Order();

@@ -41,8 +41,9 @@ public class OrderServiceTest {
     public void setCorrectEndTime(){
         Calendar calendar = Calendar.getInstance();
         Calendar toTest= calendar;
-        calendar.set(Calendar.MINUTE, 14);
-        toTest.set(Calendar.MINUTE, 40);
+        calendar.set(Calendar.MINUTE, 51);
+        toTest.set(Calendar.MINUTE, 20);
+        toTest.set(Calendar.HOUR, toTest.get(Calendar.HOUR)+1);
 
         assertEquals(service.setEndTime(calendar), toTest);
     }
