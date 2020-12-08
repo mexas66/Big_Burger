@@ -32,7 +32,7 @@
                  </td>
                 <td>
                     <input type="number" min="1" name="to_add">
-                </td>
+                </td>-
                 <td>
                     <button type="submit" name="submit">Ajouter</button>
                 </td>
