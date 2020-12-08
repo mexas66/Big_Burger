@@ -31,7 +31,7 @@
                      <c:out value="${burger.price}" />€
                  </td>
                 <td>
-                    <c:out value="${}" />
+                    <c:out value="${burgerDTOs[burger]}" />
                 </td>
 
              </tr>

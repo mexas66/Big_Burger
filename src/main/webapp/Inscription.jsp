@@ -41,7 +41,7 @@
     <br/>
     <br/>
     <br/>
-    <label for="phone"><B>Phone</B></label>
+    <label for="phone"><B>Téléphone</B></label>
     <input id="phone" name="phone" type="text" required/><br/>
     <br/>
     <br/>
