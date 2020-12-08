@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet
-public class AddOrderServletController extends HttpServlet {
+public class RecapOrderServletController extends HttpServlet {
     private BurgerService burgerService = new BurgerService();
 
     @Override
