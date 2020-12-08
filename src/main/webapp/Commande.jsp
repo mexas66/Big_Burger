@@ -7,8 +7,9 @@
     <meta charset="UTF-8">
     <title>Commande</title>
 </head>
-<body style="background-color:#e6ddb7">
+<body style background-color="#e6ddb7 ">
 
+<h4 style="text-align:center;font-family:cursive;font-size:50px"><u>MENU</u></h4>
 
 
 <form action="recap" method ="post">
@@ -31,6 +32,9 @@
                 <td>
                     <input type="number" min="0" name="${burger.id}to_add">
                 </td>-
+                <td>
+                    <button type="submit" name="submit">Ajouter</button>
+                </td>
              </tr>
          </c:forEach>
      </tbody>
