@@ -4,6 +4,8 @@ import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.persistance.OrderRepository;
 
+import java.util.Calendar;
+
 
 public class OrderService {
 
@@ -34,5 +36,17 @@ public class OrderService {
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
+    }
+
+    public Calendar setEndTime(Calendar calendar) {
+        int toAdd = calendar.get(Calendar.MINUTE);
+        toAdd %= 10;
+        if(toAdd != 0){
+            toAdd = 10 - toAdd;
+        }
+        toAdd += 20;
+        calendar.add(Calendar.MINUTE, toAdd);
+
+        return calendar;
     }
 }
