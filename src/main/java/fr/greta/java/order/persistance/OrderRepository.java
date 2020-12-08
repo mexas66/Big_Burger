@@ -9,19 +9,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OrderRepository {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_INTO="INSERT INTO _order (user_id, _beginning, _end, _total)" +
+    private static final String INSERT_INTO="INSERT INTO _order (user_id, _beginning, _end, _total) " +
             "VALUES(?, ?, ?, ?)";
     private static final String SELECT_REQUEST="SELECT id, user_id, _beginning, _end, _total FROM _order WHERE id = ?";
     private static final String SELECT_REQUEST_ORDER_ITEMS= "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
+    private static final String INSERT_INTO_ORDER_ITEMS= "INSERT INTO _order_items (order_id, burger_id, _quantity "+
+            "VALUES(?, ?, ?)";
 
 
     public OrderEntity create(OrderEntity entity) throws RepositoryException {
@@ -30,6 +30,7 @@ public class OrderRepository {
         ResultSet resultSet = null;
 
         try {
+            insertCommandItems(entity);
             conn = connectionFactory.create();
             statement = conn.prepareStatement(INSERT_INTO, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setInt(1, entity.getUser_id());
@@ -120,5 +121,22 @@ public class OrderRepository {
         }
     }
 
+
+    private void insertCommandItems(OrderEntity entity) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        conn = connectionFactory.create();
+        for(int burgerid: entity.getBurgersId().keySet()){
+            statement = conn.prepareStatement(INSERT_INTO_ORDER_ITEMS);
+            statement.setInt(1, entity.getId());
+            statement.setInt(2, burgerid);
+            statement.setInt(3, entity.getBurgersId().get(burgerid));
+            statement.executeUpdate();
+        }
+
+        JdbcTool.close(conn,statement,resultSet);
+    }
 
 }
