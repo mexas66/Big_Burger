@@ -34,13 +34,18 @@ public class RecapOrderServletController extends HttpServlet {
 
         try {
             List<Burger> burgers = burgerService.getAllBurgers();
+            int quantity;
 
             order.setTotal(0);
             order.setUser((User)session.getAttribute("usercurrent"));
             order.setBurgers(new HashMap<Burger, Integer>());
 
             for(Burger burger: burgers){
-                order.getBurgers().put(burger, Integer.parseInt(req.getParameter(valueOf(burger.getId())+"to_add")));
+                quantity = Integer.parseInt(req.getParameter(valueOf(burger.getId())+"to_add"));
+                if(quantity != 0) {
+                    order.getBurgers().put(burger, quantity);
+                    order.setTotal(order.getTotal() + burger.getPrice() * quantity);
+                }
             }
 
             req.setAttribute("order", order);
