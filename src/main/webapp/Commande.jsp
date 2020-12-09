@@ -31,15 +31,14 @@
                      <c:out value="${burger.price}" />€
                  </td>
                 <td>
-                    <input type="number" min="1" name="to_add">
+                    <input type="number" min="0" name="${burger.id}to_add">
                 </td>-
-                <td>
-                    <button type="submit" name="submit">Ajouter</button>
-                </td>
              </tr>
          </c:forEach>
      </tbody>
  </table>
+<button type="submit" name="submit">Ajouter</button>
+
  </form>
 </body>
 </html>

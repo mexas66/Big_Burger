@@ -19,37 +19,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet
+import static java.lang.String.valueOf;
+
+
+@WebServlet(urlPatterns = "/recap")
 public class RecapOrderServletController extends HttpServlet {
     private BurgerService burgerService = new BurgerService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Order order = (Order)session.getAttribute("order");
 
+        Order order = new Order();
 
         try {
-            Burger burger = burgerService.findById(Integer.parseInt(req.getParameter("burger_id")));
+            List<Burger> burgers = burgerService.getAllBurgers();
 
-            if(order == null){
-                order = new Order();
-                order.setBurgers(new HashMap<Burger, Integer>());
-                order.setTotal(0);
-                order.setUser((User)session.getAttribute("usercurrent"));
+            order.setTotal(0);
+            order.setUser((User)session.getAttribute("usercurrent"));
+            order.setBurgers(new HashMap<Burger, Integer>());
+
+            for(Burger burger: burgers){
+                order.getBurgers().put(burger, Integer.parseInt(req.getParameter(valueOf(burger.getId())+"to_add")));
             }
 
-            Map<Burger, Integer> burgers = order.getBurgers();
+            req.setAttribute("order", order);
 
-            burgers.put(burger, Integer.parseInt(req.getParameter("to_add")));
-
-            order.setBurgers(burgers);
-
-            session.setAttribute("order", order);
-
-            RequestDispatcher dispatch = req.getRequestDispatcher("/menu");
-            dispatch.forward(req, resp);
-
+            req.getRequestDispatcher("/RecapCommande.jsp")
+                    .forward(req, resp);
 
         } catch (ServiceException e) {
             e.printStackTrace();
