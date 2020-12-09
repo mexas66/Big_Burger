@@ -31,12 +31,15 @@ public class ValidateOrderServletController extends HttpServlet {
 
         try {
             service.create(order);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/command_history");
+
+            session.removeAttribute("order");
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/user");
             dispatcher.forward(req, resp);
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            resp.sendRedirect(req.getContextPath()+"/menu?");
+            resp.sendRedirect(req.getContextPath()+"/menu?message=ORDER_ERROR");
         }
     }
 }

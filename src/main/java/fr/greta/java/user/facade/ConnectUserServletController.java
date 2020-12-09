@@ -27,11 +27,12 @@ public class ConnectUserServletController extends HttpServlet {
                 session.setAttribute("currentuser", user);
 
                 resp.sendRedirect(req.getContextPath() + "/accueil?message=CONNECT_SUCCESS");
+            }else {
+                resp.sendRedirect(req.getContextPath() + "/BigBurger.jsp?message=CONNECT_ERROR");
             }
-            resp.sendRedirect(req.getContextPath() + "/connect?message=CONNECT_ERROR");
         }catch (ServiceException e){
             e.printStackTrace();
-            resp.sendRedirect(req.getContextPath() + "/connect?message=CONNECT_ERROR");
+            resp.sendRedirect(req.getContextPath() + "/BigBurger.jsp?message=CONNECT_ERROR");
         }
     }
 }

@@ -43,7 +43,7 @@ public class OrderWrapper {
         entity.setBeginning(toTimestamp(model.getBeginning()));
         entity.setEnd(toTimestamp(model.getEnd()));
 
-        Map<Integer, Integer> burgers_id = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> burgers_id = new HashMap<>();
 
         for(Burger burger: model.getBurgers().keySet()){
             burgers_id.put(burger.getId(), model.getBurgers().get(burger));

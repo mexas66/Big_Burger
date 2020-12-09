@@ -14,7 +14,7 @@
 
  <h4 style="text-align:center;font-family:cursive;font-size:50px"><u>RECAPITULATIF</u></h4>
 
-<form>
+<form action="validate" method="POST" >
     <table>
 <thead>
          <th>Nom du Burger</th>
@@ -22,7 +22,7 @@
          <th>Quantité</th>
  </thead>
  <tbody>
-         <c:forEach items="${order.burgerDTOs}" var="burger">
+         <c:forEach items="${orderDTO.burgerDTOs}" var="burger">
              <tr>
                  <td>
                      <c:out value="${burger.key.label}" />
@@ -38,8 +38,8 @@
          </c:forEach>
      </tbody>
 
-     <c:out value="${order.total}" />€
-     <button type="submit" name="submit">Valider Commande</button>
+     <c:out value="${orderDTO.total}" />€
+     <button type="submit" name="order" value=${order}>Valider Commande</button>
     </table>
 </form>
 

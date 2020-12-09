@@ -22,7 +22,7 @@
     <input id="login" name="login" type="text" required/><br/>
     <label for="password"><B>Mot de passe</B></label>
     <input id="password" name="password" type="text" required/>
-    <button onclick="alert(this.value)" style="background-color:#6ca302;color:#5b3500"><B>Valider</B></button>
+    <button type="submit" name="submit"><B>Valider</B></button>
 
 </form>
 <p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous inscrire ? </B><a href="Inscription.html">Page d'inscription</a></p>

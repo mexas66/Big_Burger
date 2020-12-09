@@ -32,7 +32,7 @@ public class OrderEntity {
         return burgers_id;
     }
 
-    public void setBurgerEntities(Map<Integer, Integer> burgerEntities) {
+    public void setBurgerEntities(Map<Integer, Integer> burgers_id) {
         this.burgers_id = burgers_id;
     }
 

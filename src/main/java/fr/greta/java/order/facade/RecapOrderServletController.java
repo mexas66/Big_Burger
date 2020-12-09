@@ -40,7 +40,7 @@ public class RecapOrderServletController extends HttpServlet {
             List<Burger> burgers = burgerService.getAllBurgers();
 
             order.setTotal(0);
-            order.setUser((User)session.getAttribute("usercurrent"));
+            order.setUser((User)session.getAttribute("currentuser"));
             order.setBurgers(new HashMap<Burger, Integer>());
 
             for(Burger burger: burgers){
@@ -53,7 +53,8 @@ public class RecapOrderServletController extends HttpServlet {
                 }
             }
 
-            req.setAttribute("order", dtoWrapper.toDTO(order));
+            req.setAttribute("orderDTO", dtoWrapper.toDTO(order));
+            session.setAttribute("order", order);
 
             req.getRequestDispatcher("/RecapCommande.jsp")
                     .forward(req, resp);
@@ -62,7 +63,6 @@ public class RecapOrderServletController extends HttpServlet {
             e.printStackTrace();
             resp.sendRedirect(req.getContextPath()+"/menu");
         }
-
 
     }
 }
