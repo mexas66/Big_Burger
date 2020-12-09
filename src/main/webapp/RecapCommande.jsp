@@ -22,7 +22,7 @@
          <th>Total</th>
  </thead>
  <tbody>
-         <c:forEach items="${order.burgers}" var="burger">
+         <c:forEach items="${order.burgerDTOs}" var="burger">
              <tr>
                  <td>
                      <c:out value="${burger.label}" />
@@ -31,7 +31,7 @@
                      <c:out value="${burger.price}" />€
                  </td>
                 <td>
-                    <c:out value="${}" />
+                    <c:out value="${burgerDTOs[burger]}" />
                 </td>
 
              </tr>
