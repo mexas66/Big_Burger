@@ -13,7 +13,7 @@
 
 
 
-<form>
+<form action="recap" method ="post">
  <table>
      <thead>
          <th>Nom du Burger</th>

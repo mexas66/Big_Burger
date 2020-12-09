@@ -26,15 +26,18 @@ import static java.lang.String.valueOf;
 public class RecapOrderServletController extends HttpServlet {
     private BurgerService burgerService = new BurgerService();
 
+    private OrderDTOWrapper dtoWrapper = new OrderDTOWrapper();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
         Order order = new Order();
+        int quantity;
+        Map<Burger, Integer> tmp;
 
         try {
             List<Burger> burgers = burgerService.getAllBurgers();
-            int quantity;
 
             order.setTotal(0);
             order.setUser((User)session.getAttribute("usercurrent"));
@@ -43,12 +46,14 @@ public class RecapOrderServletController extends HttpServlet {
             for(Burger burger: burgers){
                 quantity = Integer.parseInt(req.getParameter(valueOf(burger.getId())+"to_add"));
                 if(quantity != 0) {
-                    order.getBurgers().put(burger, quantity);
+                    tmp = order.getBurgers();
+                    tmp.put(burger, quantity);
+                    order.setBurgers(tmp);
                     order.setTotal(order.getTotal() + burger.getPrice() * quantity);
                 }
             }
 
-            req.setAttribute("order", order);
+            req.setAttribute("order", dtoWrapper.toDTO(order));
 
             req.getRequestDispatcher("/RecapCommande.jsp")
                     .forward(req, resp);
