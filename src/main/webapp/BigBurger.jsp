@@ -9,9 +9,9 @@
 
 </head>
 
+<h4 style="text-align:center;font-family:cursive;font-size:100px;color:#003344">BIG BURGER</h4>
 
 <body style background="https://i.pinimg.com/originals/58/67/d8/5867d8f8218432be5f16ccefe8c03fd0.jpg">
-<h4 style="text-align:center;font-family:cursive;font-size:100px;color:#003344">BIG BURGER</h4>
 
 <img src="https://www.gifimili.com/gif/2018/02/hamburger.gif" style="border:solid 5px" width="300" height="300"
      title="LE BURGER CLASSIQUE 6.50€" alt="" class="arrondie">

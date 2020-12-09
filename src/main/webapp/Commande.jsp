@@ -7,10 +7,9 @@
     <meta charset="UTF-8">
     <title>Commande</title>
 </head>
-<body style background-color="#e6ddb7 ">
+<body style="background-color:#e6ddb7">
 
-<h4 style="text-align:center;font-family:cursive;font-size:50px"><u>MENU</u></h4>
-
+<h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Menu</h4>
 
 
 <form action="recap" method ="post">

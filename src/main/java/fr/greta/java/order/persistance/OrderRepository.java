@@ -1,7 +1,6 @@
 package fr.greta.java.order.persistance;
 
 import fr.greta.java.ConnectionFactory;
-import fr.greta.java.burger.persistance.BurgerEntity;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
