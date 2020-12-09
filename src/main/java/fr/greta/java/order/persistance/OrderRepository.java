@@ -16,11 +16,11 @@ public class OrderRepository {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_INTO="INSERT INTO _order (user_id, _beginning, _end, _total) " +
+    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total) " +
             "VALUES(?, ?, ?, ?)";
-    private static final String SELECT_REQUEST="SELECT id, user_id, _beginning, _end, _total FROM _order WHERE id = ?";
-    private static final String SELECT_REQUEST_ORDER_ITEMS= "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
-    private static final String INSERT_INTO_ORDER_ITEMS= "INSERT INTO _order_items (order_id, burger_id, _quantity "+
+    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total FROM _order WHERE id = ?";
+    private static final String SELECT_REQUEST_ORDER_ITEMS = "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
+    private static final String INSERT_INTO_ORDER_ITEMS = "INSERT INTO _order_items (order_id, burger_id, _quantity) " +
             "VALUES(?, ?, ?)";
 
 
@@ -30,7 +30,7 @@ public class OrderRepository {
         ResultSet resultSet = null;
 
         try {
-            insertCommandItems(entity);
+
             conn = connectionFactory.create();
             statement = conn.prepareStatement(INSERT_INTO, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setInt(1, entity.getUser_id());
@@ -39,18 +39,28 @@ public class OrderRepository {
             statement.setDouble(4, entity.getTotal());
             statement.executeUpdate();
 
-            resultSet= statement.getGeneratedKeys();
+            resultSet = statement.getGeneratedKeys();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 entity.setId(resultSet.getInt(1));
+
+                for (int burgerid : entity.getBurgersId().keySet()) {
+                    statement = conn.prepareStatement(INSERT_INTO_ORDER_ITEMS);
+                    statement.setInt(1, entity.getId());
+                    statement.setInt(2, burgerid);
+                    statement.setInt(3, entity.getBurgersId().get(burgerid));
+                    statement.executeUpdate();
+                }
+
+
                 return entity;
-            }else{
-                throw new RepositoryException("Erreur lors de l'execution de la requete: "+INSERT_INTO);
+            } else {
+                throw new RepositoryException("Erreur lors de l'execution de la requete: " + INSERT_INTO);
             }
 
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RepositoryException("Erreur lors de l'execution de la requete: "+INSERT_INTO, e);
-        }finally{
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + INSERT_INTO, e);
+        } finally {
             JdbcTool.close(conn, statement, resultSet);
         }
     }
@@ -61,21 +71,21 @@ public class OrderRepository {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
-        try{
+        try {
             conn = connectionFactory.create();
-            statement= conn.prepareStatement(SELECT_REQUEST);
+            statement = conn.prepareStatement(SELECT_REQUEST);
             statement.setInt(1, order_id);
             resultSet = statement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return toEntity(resultSet);
-            }else{
-                throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST);
+            } else {
+                throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST);
             }
-        }catch(SQLException | ClassNotFoundException | RepositoryException e){
-            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST, e);
-        }finally {
-            JdbcTool.close(conn,statement,resultSet);
+        } catch (SQLException | ClassNotFoundException | RepositoryException e) {
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST, e);
+        } finally {
+            JdbcTool.close(conn, statement, resultSet);
         }
     }
 
@@ -109,34 +119,15 @@ public class OrderRepository {
             resultSet = statement.executeQuery();
 
 
-            while (resultSet.next()){
-                burgers_id.put(resultSet.getInt("burger_id"),resultSet.getInt("_quantity"));
+            while (resultSet.next()) {
+                burgers_id.put(resultSet.getInt("burger_id"), resultSet.getInt("_quantity"));
             }
 
             return burgers_id;
-        } catch(SQLException | ClassNotFoundException e){
-            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST_ORDER_ITEMS, e);
-        }finally{
-            JdbcTool.close(conn,statement,resultSet);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST_ORDER_ITEMS, e);
+        } finally {
+            JdbcTool.close(conn, statement, resultSet);
         }
     }
-
-
-    private void insertCommandItems(OrderEntity entity) throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
-        conn = connectionFactory.create();
-        for(int burgerid: entity.getBurgersId().keySet()){
-            statement = conn.prepareStatement(INSERT_INTO_ORDER_ITEMS);
-            statement.setInt(1, entity.getId());
-            statement.setInt(2, burgerid);
-            statement.setInt(3, entity.getBurgersId().get(burgerid));
-            statement.executeUpdate();
-        }
-
-        JdbcTool.close(conn,statement,resultSet);
-    }
-
 }

@@ -24,10 +24,8 @@ public class ValidateOrderServletController extends HttpServlet {
         HttpSession session = req.getSession();
         Order order = (Order)session.getAttribute("order");
 
-        Calendar calendar = Calendar.getInstance();
-
-        order.setBeginning(calendar);
-        order.setEnd(service.setEndTime(calendar));
+        order.setBeginning(Calendar.getInstance());
+        order.setEnd(service.setEndTime(Calendar.getInstance()));
 
         try {
             service.create(order);
