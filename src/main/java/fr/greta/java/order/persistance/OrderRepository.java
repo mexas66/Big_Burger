@@ -5,11 +5,12 @@ import fr.greta.java.burger.persistance.BurgerEntity;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.swing.plaf.nimbus.State;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OrderRepository {
@@ -18,7 +19,10 @@ public class OrderRepository {
 
     private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total) " +
             "VALUES(?, ?, ?, ?)";
-    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total FROM _order WHERE id = ?";
+    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total FROM _order";
+    private static final String WHERE_ID = "WHERE id = ?";
+    //private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
+
     private static final String SELECT_REQUEST_ORDER_ITEMS = "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
     private static final String INSERT_INTO_ORDER_ITEMS = "INSERT INTO _order_items (order_id, burger_id, _quantity) " +
             "VALUES(?, ?, ?)";
@@ -73,17 +77,17 @@ public class OrderRepository {
 
         try {
             conn = connectionFactory.create();
-            statement = conn.prepareStatement(SELECT_REQUEST);
+            statement = conn.prepareStatement(SELECT_REQUEST+WHERE_ID);
             statement.setInt(1, order_id);
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 return toEntity(resultSet);
             } else {
-                throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST);
+                throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST+WHERE_ID);
             }
         } catch (SQLException | ClassNotFoundException | RepositoryException e) {
-            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST, e);
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST+WHERE_ID, e);
         } finally {
             JdbcTool.close(conn, statement, resultSet);
         }
@@ -128,6 +132,30 @@ public class OrderRepository {
             throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST_ORDER_ITEMS, e);
         } finally {
             JdbcTool.close(conn, statement, resultSet);
+        }
+    }
+
+    public List<OrderEntity> getToPrepareOrders() throws RepositoryException {
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        List<OrderEntity> entities = new ArrayList<>();
+
+        try{
+            conn = connectionFactory.create();
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(SELECT_REQUEST);
+
+            while(resultSet.next()){
+                entities.add(toEntity(resultSet));
+            }
+
+            return entities;
+        }catch (ClassNotFoundException | SQLException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST, e);
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
         }
     }
 }

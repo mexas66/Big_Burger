@@ -10,6 +10,7 @@ import java.util.Map;
 public class OrderDTO {
     private Map<BurgerDTO,Integer> burgerDTOs;
     private int id;
+    private UserDTO userDTO;
     private Date beginning;
     private Date end;
     private double total;
@@ -30,6 +31,13 @@ public class OrderDTO {
         this.id = id;
     }
 
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
 
     public Date getBeginning() {
         return beginning;

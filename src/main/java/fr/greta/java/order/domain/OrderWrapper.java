@@ -55,6 +55,15 @@ public class OrderWrapper {
     }
 
 
+    public List<Order> fromEntities(List<OrderEntity> entities) throws ServiceException {
+        List<Order> models = new ArrayList<>();
+
+        for(OrderEntity entity: entities){
+            models.add(fromEntity(entity));
+        }
+
+        return models;
+    }
 
 
     private Timestamp toTimestamp(Calendar calendar){

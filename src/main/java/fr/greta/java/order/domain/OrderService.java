@@ -5,6 +5,7 @@ import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.persistance.OrderRepository;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class OrderService {
@@ -48,5 +49,13 @@ public class OrderService {
         calendar.add(Calendar.MINUTE, toAdd);
 
         return calendar;
+    }
+
+    public List<Order> getToPrepareOrders() throws ServiceException {
+        try {
+            return wrapper.fromEntities(repository.getToPrepareOrders());
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
     }
 }
