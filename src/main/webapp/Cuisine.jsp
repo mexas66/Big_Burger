@@ -20,14 +20,14 @@
          <th>Heure théorique de fin de préparation 4</th>
      </thead>
      <tbody>
-         <c:forEach items="${requestScope.orders}" var="order">
+         <c:forEach items="${requestScope.orderlist}" var="order">
          <a href="/detail?order_id=${order.id}">
              <tr>
               <td>
                  <c:out value="${order.id}"/>€
                 </td>
                  <td>
-                     <c:out value="${order.user.firstname} ${order.user.lastname}" />
+                     <c:out value="${order.userDTO.firstname} ${order.userDTO.lastname}" />
                  </td>
                  <td>
                      <c:out value="${order.beginning}" />€
