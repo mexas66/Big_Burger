@@ -4,8 +4,6 @@ import fr.greta.java.ConnectionFactory;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
-import javax.servlet.RequestDispatcher;
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,9 +14,9 @@ public class OrderRepository {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total) " +
-            "VALUES(?, ?, ?, ?)";
-    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total FROM _order";
+    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total, _state) " +
+            "VALUES(?, ?, ?, ?, ?)";
+    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state FROM _order";
     private static final String WHERE_ID = "WHERE id = ?";
     private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
 
@@ -40,6 +38,7 @@ public class OrderRepository {
             statement.setTimestamp(2, entity.getBeginning());
             statement.setTimestamp(3, entity.getEnd());
             statement.setDouble(4, entity.getTotal());
+            statement.setString(5, entity.getState());
             statement.executeUpdate();
 
             resultSet = statement.getGeneratedKeys();
@@ -96,11 +95,12 @@ public class OrderRepository {
 
         OrderEntity entity = new OrderEntity();
         entity.setId(resultSet.getInt("id"));
-        entity.setBurgerEntities(getOrderItems(resultSet.getInt("id")));
+        entity.setBurgersId(getOrderItems(resultSet.getInt("id")));
         entity.setBeginning(resultSet.getTimestamp("_beginning"));
         entity.setEnd(resultSet.getTimestamp("_end"));
         entity.setUser_id(resultSet.getInt("user_id"));
         entity.setTotal(resultSet.getDouble("_total"));
+        entity.setState(resultSet.getString("_state"));
 
         return entity;
     }

@@ -53,6 +53,15 @@
         <input id="password" name="password" type="password" required/><br/>
     <br/>
 
+    <c:if test="${not empty sessionScope.currentuser}">
+        <c:if test="${currentuser.role == 'ADMIN'}">
+            <select name="role">
+                <option value="COOKER">Cuisinier</option>
+                <option value="DELIVER">Livreur</option>
+            </select>
+        </c:if>
+    </c:if>
+
     <button type="submit" name="submit" style="background-color:#bbd2e1;color:#5b3500"><B>Valider</B></button>
 
 </form>
