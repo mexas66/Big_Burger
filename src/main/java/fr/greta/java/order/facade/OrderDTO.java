@@ -14,6 +14,7 @@ public class OrderDTO {
     private Date beginning;
     private Date end;
     private double total;
+    private String _state;
 
     public Map<BurgerDTO, Integer> getBurgerDTOs() {
         return burgerDTOs;
@@ -61,5 +62,13 @@ public class OrderDTO {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String get_state() {
+        return _state;
+    }
+
+    public void set_state(String _state) {
+        this._state = _state;
     }
 }

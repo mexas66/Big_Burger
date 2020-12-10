@@ -66,4 +66,12 @@ public class OrderService {
             throw new ServiceException(e);
         }
     }
+
+    public List<Order> getNotEndedOrders() throws ServiceException {
+        try {
+            return wrapper.fromEntities(repository.getNotEndedOrders());
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
