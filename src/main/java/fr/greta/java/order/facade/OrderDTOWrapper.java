@@ -37,6 +37,7 @@ public class OrderDTOWrapper {
             burgersDTO.put(burgerDTOWrapper.toDTO(burger), model.getBurgers().get(burger));
         }
 
+        dto.setState(model.getState());
         dto.setBurgerDTOs(burgersDTO);
 
         return dto;

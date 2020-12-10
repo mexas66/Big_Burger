@@ -18,6 +18,7 @@ import java.util.List;
 public class UserInfoServletController extends HttpServlet {
     private OrderService orderService= new OrderService();
     private OrderDTOWrapper orderDTO = new OrderDTOWrapper();
+    private UserDTOWrapper dtoWrapper = new UserDTOWrapper();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,13 +32,14 @@ public class UserInfoServletController extends HttpServlet {
 
 
             req.setAttribute("orders", orderDTO.toDTOs(orders));
+            req.setAttribute("currentuser", dtoWrapper.toDTO(user));
 
             req.getRequestDispatcher("/Utilisateur.jsp")
                     .forward(req, resp);
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            resp.sendRedirect(req.getContextPath()+"BigBurger.jsp?message=USER_ERROR_MESSAGE");
+            resp.sendRedirect(req.getContextPath()+"/BigBurger.jsp?message=USER_ERROR_MESSAGE");
         }
     }
 }

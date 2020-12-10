@@ -22,7 +22,7 @@ public class OrderRepository {
     private static final String WHERE_ID = "WHERE id = ?";
     private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
     private static final String SELECT_STATE = "SELECT _state FROM _order";
-    private static final String WHERE_STATE_DIFFERENT = "WHERE _state != ENDED";
+    private static final String WHERE_STATE_DIFFERENT = " WHERE _state <> 'ENDED'";
 
     private static final String SELECT_REQUEST_ORDER_ITEMS = "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
     private static final String INSERT_INTO_ORDER_ITEMS = "INSERT INTO _order_items (order_id, burger_id, _quantity) " +

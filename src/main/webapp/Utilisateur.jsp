@@ -14,17 +14,17 @@
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Informations</h4>
 
 
-                    <p> <c:out value="${sessionScope.currentuser.firstname}"/></p>
-                    <p> <c:out value="${sessionScope.currentuser.lastname}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.firstname}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.lastname}"/></p>
 
-                    <p> <c:out value="${sessionScope.currentuser.addressDTO.number}"/></p>
-                    <p> <c:out value="${sessionScope.currentuser.addressDTO.street}"/></p>
-                    <p> <c:out value="${sessionScope.currentuser.addressDTO.zipcode}"/></p>
-                    <p> <c:out value="${sessionScope.currentuser.addressDTO.city}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.addressDTO.number}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.addressDTO.street}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.addressDTO.zipCode}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.addressDTO.city}"/></p>
 
-                    <p> <c:out value="${sessionScope.currentuser.phone}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.phone}"/></p>
 
-                    <p> <c:out value="${sessionScope.currentuser.email}"/></p>
+                    <p> <c:out value="${requestScope.currentuser.email}"/></p>
 
           <table>
 
@@ -51,6 +51,7 @@
            <c:out value="${order.state}"/>
                </td>
            </tr>
+        </c:forEach>
 </tbody>
           </table>
 </body>
