@@ -51,7 +51,10 @@
            <c:out value="${order.state}"/>
                </td>
            </tr>
+<<<<<<< HEAD
         </c:forEach>
+=======
+>>>>>>> origin/LudivineBranch
 </tbody>
           </table>
 </body>
