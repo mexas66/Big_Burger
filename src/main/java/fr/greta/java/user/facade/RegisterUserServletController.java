@@ -23,6 +23,7 @@ public class RegisterUserServletController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Address address = new Address();
         User user = new User();
+        User current = (User)req.getSession().getAttribute("currentuser");
         try {
             address.setNumber(req.getParameter("number"));
             address.setStreet(req.getParameter("street"));
@@ -37,6 +38,12 @@ public class RegisterUserServletController extends HttpServlet {
             user.setEmail(req.getParameter("email"));
             user.setPassword(req.getParameter("password"));
             user.setPhone(req.getParameter("phone"));
+
+            if( current != null && current.getRole().equals("ADMIN")){
+                user.setRole(req.getParameter("role"));
+            }else {
+                user.setRole("USER");
+            }
 
             service.create(user);
 

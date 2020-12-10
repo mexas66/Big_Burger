@@ -9,6 +9,7 @@ public class UserDTO {
     private String lastname;
     private String phone;
     private AddressDTO addressDTO;
+    private String role;
 
     public int getId() {
         return id;
@@ -66,5 +67,13 @@ public class UserDTO {
 
     public void setAdressDTO(AddressDTO addressDTO) {
         this.addressDTO = addressDTO;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

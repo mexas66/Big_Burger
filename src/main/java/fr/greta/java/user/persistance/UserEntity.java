@@ -8,6 +8,7 @@ public class UserEntity {
     private String lastname;
     private String phone;
     private int address_id;
+    private String role;
 
     public int getId() {
         return id;
@@ -63,5 +64,13 @@ public class UserEntity {
 
     public void setAddress_id(int address_id) {
         this.address_id = address_id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

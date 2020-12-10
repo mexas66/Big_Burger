@@ -20,7 +20,7 @@ public class OrderRepository {
             "VALUES(?, ?, ?, ?)";
     private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total FROM _order";
     private static final String WHERE_ID = "WHERE id = ?";
-    //private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
+    private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
 
     private static final String SELECT_REQUEST_ORDER_ITEMS = "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
     private static final String INSERT_INTO_ORDER_ITEMS = "INSERT INTO _order_items (order_id, burger_id, _quantity) " +
@@ -144,7 +144,7 @@ public class OrderRepository {
         try{
             conn = connectionFactory.create();
             statement = conn.createStatement();
-            resultSet = statement.executeQuery(SELECT_REQUEST);
+            resultSet = statement.executeQuery(SELECT_REQUEST+WHERE_STATE);
 
             while(resultSet.next()){
                 entities.add(toEntity(resultSet));
@@ -152,7 +152,7 @@ public class OrderRepository {
 
             return entities;
         }catch (ClassNotFoundException | SQLException e){
-            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST, e);
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST+WHERE_STATE, e);
         }finally {
             JdbcTool.close(conn,statement,resultSet);
         }
