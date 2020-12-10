@@ -58,4 +58,12 @@ public class OrderService {
             throw new ServiceException(e);
         }
     }
+
+    public Order updateOrderState(int order_id) throws ServiceException {
+        try {
+            return wrapper.fromEntity(repository.updateOrderState(order_id));
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
