@@ -32,7 +32,7 @@
               <br/>
               <br/>
 
-              <button type="submit" style="background-color:#dddd99;color:black" name="submit"><B>Valider</B></button>
+              <button type="submit" style="background-color:#bbd2e1;color:black" name="submit"><B>Valider</B></button>
 
           </form>
      </tbody>

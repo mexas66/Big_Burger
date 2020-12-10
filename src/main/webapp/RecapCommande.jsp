@@ -40,9 +40,11 @@
      </tbody>
 
  </table>
+    <B><c:out value="${orderDTO.total}" />€</B>
+<br/>
+      <button type="submit" style="background-color:#bbd2e1;color:black" name="order" value=${order}><B>Valider Commande</B></button>
+
 </form>
 
-   <B><c:out value="${orderDTO.total}" />€</B>
-     <button type="submit" style="background-color:#caca61;color:black" name="order" value=${order}><B>Valider Commande</B></button>
 
  </body>
