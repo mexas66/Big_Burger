@@ -9,6 +9,7 @@
 </head>
 <body style="background-color:#e6ddb7">
 
+<h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Cuisine</h4>
 
 
 <form action="recap" method ="post">

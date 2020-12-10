@@ -11,7 +11,7 @@
  </script>
 
 </head>
-<body style="text-align:center;background-color:#e0cda9 ">
+<body style="text-align:center;background-color:#e0cda9">
 
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Inscription</h4>
 

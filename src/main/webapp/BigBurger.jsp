@@ -16,17 +16,10 @@
 <img src="https://www.gifimili.com/gif/2018/02/hamburger.gif" style="border:solid 5px" width="300" height="300"
      title="LE BURGER CLASSIQUE 6.50€" alt="" class="arrondie">
 
-<form action="connect" method="post">
-    <legend style="color:#456802;font-size:30px"><B>Se connecter</B></legend>
-    <label for="login" style="color:"><B>Mail</B></label>
-    <input id="login" name="login" type="text" required/><br/>
-    <label for="password"><B>Mot de passe</B></label>
-    <input id="password" name="password" type="text" required/>
-    <button type="submit" name="submit"><B>Valider</B></button>
 
-</form>
-<p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous inscrire ? </B><a href="Inscription.html">Page d'inscription</a></p>
-<p style="font-size:20px;color:#003344"><B>Souhaitez-vous commander ? </B><a href="Commande.html">Menu</a></p>
+<p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous connecter ? </B><a href="PageConnexion.jsp">Page de connexion</a></p>
+<p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous inscrire ? </B><a href="Inscription.jsp">Page d'inscription</a></p>
+<p style="font-size:20px;color:#003344"><B>Souhaitez-vous commander ? </B><a href="menu">Menu</a></p>
 
 </body>
 

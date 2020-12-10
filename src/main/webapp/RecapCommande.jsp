@@ -10,9 +10,9 @@
      <title>RecapCommande</title>
  </head>
 
- <body>
+ <body style="background-color:#d6d6d6">
 
- <h4 style="text-align:center;font-family:cursive;font-size:50px"><u>RECAPITULATIF</u></h4>
+ <h4 style="text-align:center;font-family:cursive;font-size:50px">RECAPITULATIF</h4>
 
 <form action="validate" method="POST" >
     <table>
@@ -39,10 +39,10 @@
          </c:forEach>
      </tbody>
 
-     <c:out value="${orderDTO.total}" />€
-     <button type="submit" name="order" value=${order}>Valider Commande</button>
-    </table>
+ </table>
 </form>
 
+   <B><c:out value="${orderDTO.total}" />€</B>
+     <button type="submit" style="background-color:#caca61;color:black" name="order" value=${order}><B>Valider Commande</B></button>
 
  </body>
