@@ -20,6 +20,8 @@
 <p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous connecter ? </B><a href="PageConnexion.jsp">Page de connexion</a></p>
 <p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous inscrire ? </B><a href="Inscription.jsp">Page d'inscription</a></p>
 <p style="font-size:20px;color:#003344"><B>Souhaitez-vous commander ? </B><a href="menu">Menu</a></p>
+<p style="font-size:20px;color:#003344"><B>Informations utilisateur</B><a href="user">Menu</a></p>
+
 
 </body>
 
