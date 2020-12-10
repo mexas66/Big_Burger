@@ -13,9 +13,9 @@ public class UserRepository {
 
     private ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_REQUEST = "INSERT into _user(_email, _password, _firstname, _lastname, _phone, address_id)"+
-            " VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_REQUEST = "SELECT id, _email, _firstname, _lastname, _phone, address_id, _password FROM _user";
+    private static final String INSERT_REQUEST = "INSERT into _user(_email, _password, _firstname, _lastname, _phone, address_id, _role)"+
+            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_REQUEST = "SELECT id, _email, _firstname, _lastname, _phone, address_id, _role _password FROM _user";
     private static final String WHERE_ID = " WHERE id = ?";
     private static final String WHERE_EMAIL_PASSWORD=" WHERE _email = ? AND _password = ?";
 
@@ -59,6 +59,7 @@ public class UserRepository {
             statement.setString(4, userEntity.getLastname());
             statement.setString(5, userEntity.getPhone());
             statement.setInt(6, userEntity.getAddress_id());
+            statement.setString(7, userEntity.getRole());
 
             statement.executeUpdate();
             resultSet = statement.getGeneratedKeys();
@@ -90,6 +91,7 @@ public class UserRepository {
         entity.setLastname(resultSet.getString("_lastname"));
         entity.setPhone(resultSet.getString("_phone"));
         entity.setAddress_id(resultSet.getInt("address_id"));
+        entity.setRole(resultSet.getString("_role"));
 
         return entity;
     }

@@ -19,6 +19,7 @@ public class OrderWrapper {
         Order model = new Order();
         model.setId(entity.getId());
         model.setTotal(entity.getTotal());
+        model.setState(entity.getState());
         model.setUser(userService.findById(entity.getUser_id()));
 
         model.setBeginning(toCalendar(entity.getBeginning()));
@@ -42,6 +43,7 @@ public class OrderWrapper {
         entity.setTotal(model.getTotal());
         entity.setBeginning(toTimestamp(model.getBeginning()));
         entity.setEnd(toTimestamp(model.getEnd()));
+        entity.setState(model.getState());
 
         Map<Integer, Integer> burgers_id = new HashMap<>();
 
@@ -49,7 +51,7 @@ public class OrderWrapper {
             burgers_id.put(burger.getId(), model.getBurgers().get(burger));
         }
 
-        entity.setBurgerEntities(burgers_id);
+        entity.setBurgersId(burgers_id);
 
         return entity;
     }

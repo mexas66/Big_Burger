@@ -4,8 +4,6 @@ import fr.greta.java.ConnectionFactory;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
-import javax.servlet.RequestDispatcher;
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +14,14 @@ public class OrderRepository {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total) " +
-            "VALUES(?, ?, ?, ?)";
-    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total FROM _order";
+    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total, _state) " +
+            "VALUES(?, ?, ?, ?, ?)";
+    private static final String UPDATE_STATE= "UPDATE _order SET _state = ?";
+
+    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state FROM _order";
     private static final String WHERE_ID = "WHERE id = ?";
-    //private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
+    private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
+    private static final String SELECT_STATE = "SELECT _state FROM _order";
 
     private static final String SELECT_REQUEST_ORDER_ITEMS = "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
     private static final String INSERT_INTO_ORDER_ITEMS = "INSERT INTO _order_items (order_id, burger_id, _quantity) " +
@@ -40,6 +41,7 @@ public class OrderRepository {
             statement.setTimestamp(2, entity.getBeginning());
             statement.setTimestamp(3, entity.getEnd());
             statement.setDouble(4, entity.getTotal());
+            statement.setString(5, entity.getState());
             statement.executeUpdate();
 
             resultSet = statement.getGeneratedKeys();
@@ -96,11 +98,12 @@ public class OrderRepository {
 
         OrderEntity entity = new OrderEntity();
         entity.setId(resultSet.getInt("id"));
-        entity.setBurgerEntities(getOrderItems(resultSet.getInt("id")));
+        entity.setBurgersId(getOrderItems(resultSet.getInt("id")));
         entity.setBeginning(resultSet.getTimestamp("_beginning"));
         entity.setEnd(resultSet.getTimestamp("_end"));
         entity.setUser_id(resultSet.getInt("user_id"));
         entity.setTotal(resultSet.getDouble("_total"));
+        entity.setState(resultSet.getString("_state"));
 
         return entity;
     }
@@ -144,7 +147,7 @@ public class OrderRepository {
         try{
             conn = connectionFactory.create();
             statement = conn.createStatement();
-            resultSet = statement.executeQuery(SELECT_REQUEST);
+            resultSet = statement.executeQuery(SELECT_REQUEST+WHERE_STATE);
 
             while(resultSet.next()){
                 entities.add(toEntity(resultSet));
@@ -152,9 +155,74 @@ public class OrderRepository {
 
             return entities;
         }catch (ClassNotFoundException | SQLException e){
-            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST, e);
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST+WHERE_STATE, e);
         }finally {
             JdbcTool.close(conn,statement,resultSet);
         }
     }
+
+    public OrderEntity updateOrderState(int order_id) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String formerState = getState(order_id);
+
+            conn= connectionFactory.create();
+            statement = conn.prepareStatement(UPDATE_STATE+WHERE_ID);
+            statement.setString(1, newState(formerState));
+            statement.setInt(2, order_id);
+            statement.executeUpdate();
+
+            return findById(order_id);
+        }catch (ClassNotFoundException | SQLException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+UPDATE_STATE+WHERE_ID, e);
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
+        }
+    }
+
+
+
+    private String getState(int order_id) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try{
+            conn = connectionFactory.create();
+            statement = conn.prepareStatement(SELECT_STATE+WHERE_ID);
+            statement.setInt(1, order_id);
+            resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return resultSet.getString("_state");
+            }else{
+                throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_ID);
+            }
+        }catch (SQLException | ClassNotFoundException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_ID, e);
+
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
+        }
+    }
+
+    private String newState(String formerState) throws RepositoryException {
+        switch(formerState){
+            case "VALIDATED":
+                return "PREPARING";
+            case "PREPARING":
+                return "READY";
+            case "READY":
+                return "DELIVERING";
+            case "DELIVERING":
+                return "ENDED";
+            default:
+                throw new RepositoryException("Etat de la commande invalide");
+        }
+    }
+
+
 }

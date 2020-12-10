@@ -10,6 +10,7 @@ public class User {
     private String lastname;
     private String phone;
     private Address address;
+    private String role;
 
     public int getId() {
         return id;
@@ -65,5 +66,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

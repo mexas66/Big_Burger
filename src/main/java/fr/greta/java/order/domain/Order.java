@@ -13,6 +13,7 @@ public class Order {
     private Calendar beginning;
     private Calendar end;
     private double total;
+    private String state;
 
     public int getId() {
         return id;
@@ -60,5 +61,13 @@ public class Order {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

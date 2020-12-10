@@ -11,6 +11,7 @@ public class OrderEntity {
     private Timestamp beginning;
     private Timestamp end;
     private double total;
+    private String state;
 
     public int getId() {
         return id;
@@ -32,7 +33,7 @@ public class OrderEntity {
         return burgers_id;
     }
 
-    public void setBurgerEntities(Map<Integer, Integer> burgers_id) {
+    public void setBurgersId(Map<Integer, Integer> burgers_id) {
         this.burgers_id = burgers_id;
     }
 
@@ -58,5 +59,13 @@ public class OrderEntity {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
