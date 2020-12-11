@@ -1,6 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  
+
+    <c:if test="${sessionScope.currentuser not empty && sessionScope.currentuser.role != 'ADMIN'}">
+        <c:redirect url="${pageContext.request.contextPath}/BigBurger.jsp?message=ACCESS_DENIED"/>
+    </c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
