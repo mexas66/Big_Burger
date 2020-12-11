@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <c:if test="${sessionScope.currentuser empty}">
+        <c:redirect url="${pageContext.request.contextPath}/BigBurger.jsp?message=ACCESS_DENIED"/>
+    </c:if>
+
 <head>
     <meta charset="UTF-8">
     <title>Utilisateur</title>

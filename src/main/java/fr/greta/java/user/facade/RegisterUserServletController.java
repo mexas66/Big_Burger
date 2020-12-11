@@ -47,10 +47,10 @@ public class RegisterUserServletController extends HttpServlet {
 
             service.create(user);
 
-            resp.sendRedirect(req.getContextPath()+"/accueil?message=REGISTER_SUCCESS");
+            resp.sendRedirect(req.getContextPath()+"/BigBurger.jsp?message=REGISTER_SUCCESS");
         }catch(ServiceException e){
             e.printStackTrace();
-            resp.sendRedirect(req.getContextPath()+"/register?message=REGISTER_ERROR");
+            resp.sendRedirect(req.getContextPath()+"/Inscription.jsp?message=REGISTER_ERROR");
         }
     }
 }

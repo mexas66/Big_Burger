@@ -51,9 +51,9 @@ public class OrderService {
         return calendar;
     }
 
-    public List<Order> getToPrepareOrders() throws ServiceException {
+    public List<Order> getOrderList(String role) throws ServiceException {
         try {
-            return wrapper.fromEntities(repository.getToPrepareOrders());
+            return wrapper.fromEntities(repository.getToPrepareOrders(role));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }

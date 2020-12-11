@@ -26,7 +26,7 @@ public class ConnectUserServletController extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("currentuser", user);
 
-                resp.sendRedirect(req.getContextPath() + "/accueil?message=CONNECT_SUCCESS");
+                resp.sendRedirect(req.getContextPath() + "/BigBurger.jsp?message=CONNECT_SUCCESS");
             }else {
                 resp.sendRedirect(req.getContextPath() + "/BigBurger.jsp?message=CONNECT_ERROR");
             }

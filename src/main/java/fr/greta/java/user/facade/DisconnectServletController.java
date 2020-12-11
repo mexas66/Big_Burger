@@ -20,6 +20,6 @@ public class DisconnectServletController extends HttpServlet {
             session.removeAttribute("currentuser");
         }
 
-        resp.sendRedirect(req.getContextPath()+"/BigBurger.jsp");
+        resp.sendRedirect(req.getContextPath()+"/BigBurger.jsp?message=DISCONNECT_SUCCESS");
     }
 }
