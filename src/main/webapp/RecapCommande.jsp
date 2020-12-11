@@ -20,10 +20,13 @@
          <th>Nom du Burger</th>
          <th>Prix</th>
          <th>Quantité</th>
-         <th>Total</th>
+
  </thead>
+
  <tbody>
+
          <c:forEach items="${orderDTO.burgerDTOs}" var="burger">
+
              <tr>
                  <td>
                      <c:out value="${burger.key.label}" />
@@ -40,8 +43,9 @@
      </tbody>
 
  </table>
+ </br>
+ <th><B>Total = <B/></th>
     <B><c:out value="${orderDTO.total}" />€</B>
-<br/>
       <button type="submit" style="background-color:#bbd2e1;color:black" name="order" value=${order}><B>Valider Commande</B></button>
 
 </form>

@@ -25,16 +25,16 @@
          <a href="/detail?order_id=${order.id}">
              <tr>
               <td>
-                 <c:out value="${order.id}"/>€
+                 <c:out value="${order.id}"/>
                 </td>
                  <td>
                      <c:out value="${order.userDTO.firstname} ${order.userDTO.lastname}" />
                  </td>
                  <td>
-                     <c:out value="${order.beginning}" />€
+                     <c:out value="${order.beginning}" />
                  </td>
                   <td>
-                    <c:out value="${order.end}" />€
+                    <c:out value="${order.end}" />
                   </td>
 
              </tr>

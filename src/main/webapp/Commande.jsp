@@ -36,7 +36,7 @@
          </c:forEach>
      </tbody>
  </table>
-<button type="submit" style="background-color:#bbd2e1" name="submit">Ajouter</button>
+<button type="submit" style="background-color:#bbd2e1" name="submit"><B>Ajouter</B></button>
 
  </form>
 </body>
