@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <c:if test="${sessionScope.currentuser empty}">
+    <c:if test="${empty sessionScope.currentuser}">
         <c:redirect url="${pageContext.request.contextPath}/BigBurger.jsp?message=ACCESS_DENIED"/>
     </c:if>
 
@@ -30,6 +30,7 @@
 
                     <p> <c:out value="${requestScope.currentuser.email}"/></p>
 
+                    <a href="hystoric">Historique de Commande</a>
           <table>
 
 <thead>

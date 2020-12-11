@@ -53,7 +53,7 @@ public class OrderService {
 
     public List<Order> getOrderList(String role) throws ServiceException {
         try {
-            return wrapper.fromEntities(repository.getToPrepareOrders(role));
+            return wrapper.fromEntities(repository.getOrderList(role));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
@@ -70,6 +70,14 @@ public class OrderService {
     public List<Order> getNotEndedOrders() throws ServiceException {
         try {
             return wrapper.fromEntities(repository.getNotEndedOrders());
+        } catch (RepositoryException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public List<Order> getAllByUserId(int userId) throws ServiceException {
+        try {
+            return wrapper.fromEntities(repository.getAllByUserId(userId));
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }

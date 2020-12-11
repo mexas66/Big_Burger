@@ -14,28 +14,28 @@
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Traitement commande</h4>
 
 
-                    <p> <c:out value="${requestScope.currentuser.firstname}"/></p>
-                    <p> <c:out value="${requestScope.currentuser.lastname}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.firstname}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.lastname}"/></p>
 
-                    <p> <c:out value="${requestScope.currentuser.addressDTO.number}"/></p>
-                    <p> <c:out value="${requestScope.currentuser.addressDTO.street}"/></p>
-                    <p> <c:out value="${requestScope.currentuser.addressDTO.zipCode}"/></p>
-                    <p> <c:out value="${requestScope.currentuser.addressDTO.city}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.addressDTO.number}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.addressDTO.street}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.addressDTO.zipCode}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.addressDTO.city}"/></p>
 
-                    <p> <c:out value="${requestScope.currentuser.phone}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.phone}"/></p>
 
-                    <p> <c:out value="${requestScope.currentuser.email}"/></p>
+                    <p> <c:out value="${orderDTO.userDTO.email}"/></p>
 
-        <p>Numero de commande: <c:out value="{orderDTO.id}" /></p>
-        <p>Date de validation:<c:out value="{order.beginning}" /></p>
-        <p>Date théorique de fin:<c:out value="{order.end}" /></p>
-        <p>Etat commande:<c:out value="{order.state}" /></p>
+        <p>Numero de commande: <c:out value="${orderDTO.id}" /></p>
+        <p>Date de validation:<c:out value="${orderDTO.beginning}" /></p>
+        <p>Date théorique de fin:<c:out value="${orderDTO.end}" /></p>
+        <p>Etat commande:<c:out value="${orderDTO.state}" /></p>
 
           <table>
 
 <thead>
-      >
          <th>Nom du Burger</th>
+         <th>Prix</th>
          <th>Quantité</th>
 </thead>
 
@@ -54,34 +54,37 @@
            </tr>
 
         </c:forEach>
+      </tbody>
+    </table>
 
-<c:if test="${requestScope.currentuser.role == 'COOKER'}">
+<c:choose>
+    <c:when test="${requestScope.currentuser.role == 'COOKER'}">
+      <c:if test="${orderDTO.state == 'VALIDATED' || orderDTO.state == 'PREPARING'}">
 
-<c:if test="${requestScope.orderDTO.state == 'VALIDATED' || requestScope.orderDTO.state == 'PREPARING'}">
+        <a href="next?order_id=${orderDTO.id}"> <input type="button" value="Suivant"> </a>
 
-<a href="next"> <input type="button" value="Suivant"> </a>
+      </c:if>
+
+    </c:when>
+
+
+
+
+<c:when test="${requestScope.currentuser.role == 'DELIVERY'}">
+
+<c:if test="${orderDTO.state == 'READY' || orderDTO.state == 'DELIVERING'}">
+
+<a href="next?order_id=${orderDTO.id}"> <input type="button" value="Suivant"> </a>
+
 
 </c:if>
 
-</c:if>
+</c:when>
 
 
+</c:choose>
 
 
-<c:if test="${requestScope.currentuser.role == 'DELIVERY'}">
-
-<c:if test="${requestScope.orderDTO.state == 'READY' || requestScope.orderDTO.state == 'DELIVERING'}">
-
-<a href="next" target="_blank"> <input type="button" value="Suivant"> </a>
-
-
-</c:if>
-
-</c:if>
-
-
-</tbody>
-          </table>
 
 </body>
 
