@@ -11,10 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
-    <script>
-
- </script>
-
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 <body style="text-align:center;background-color:#e0cda9">
 

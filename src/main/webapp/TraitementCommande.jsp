@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Traitement commande</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 </head>
 
 <body style="background-color:#add8e6">

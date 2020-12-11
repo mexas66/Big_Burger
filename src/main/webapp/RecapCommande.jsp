@@ -8,6 +8,8 @@
  <head>
      <meta charset="UTF-8">
      <title>RecapCommande</title>
+     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
  </head>
 
  <body style="background-color:#d6d6d6">
