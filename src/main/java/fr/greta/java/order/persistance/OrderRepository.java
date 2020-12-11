@@ -19,8 +19,10 @@ public class OrderRepository {
     private static final String UPDATE_STATE= "UPDATE _order SET _state = ?";
 
     private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state FROM _order";
-    private static final String WHERE_ID = "WHERE id = ?";
-    private static final String WHERE_STATE = "WHERE _state = ?";
+    private static final String WHERE_ID = " WHERE id = ?";
+    private static final String WHERE_STATE = " WHERE _state = ?";
+    private static final String WHERE_USER=" WHERE user_id = ?";
+    private static final String OR_STATE = " OR _state = ?";
     private static final String SELECT_STATE = "SELECT _state FROM _order";
     private static final String WHERE_STATE_DIFFERENT = " WHERE _state <> 'ENDED'";
 
@@ -145,18 +147,22 @@ public class OrderRepository {
         ResultSet resultSet = null;
 
         List<OrderEntity> entities = new ArrayList<>();
-        String stateToGet = "";
+        String stateToGet1 = "";
+        String stateToGet2 = "";
 
         if(role.equals("COOKER")){
-            stateToGet = "'VALIDATED' OR _state = 'PREPARING'";
+            stateToGet1 = "VALIDATED";
+            stateToGet2 = "PREPARING";
         }else if(role.equals("DELIVERY")){
-            stateToGet = "'READY' OR _state = 'DELIVERING'";
+            stateToGet1 = "READY";
+            stateToGet2 = "DELIVERING";
         }
 
         try{
             conn = connectionFactory.create();
-            statement = conn.prepareStatement(SELECT_REQUEST+WHERE_STATE);
-            statement.setString(1, stateToGet);
+            statement = conn.prepareStatement(SELECT_REQUEST+WHERE_STATE+OR_STATE);
+            statement.setString(1, stateToGet1);
+            statement.setString(2, stateToGet2);
             resultSet = statement.executeQuery();
 
             while(resultSet.next()){
@@ -165,7 +171,7 @@ public class OrderRepository {
 
             return entities;
         }catch (ClassNotFoundException | SQLException e){
-            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST+WHERE_STATE, e);
+            throw new RepositoryException("Erreur lors de l'execution de la requete: " + SELECT_REQUEST+WHERE_STATE+OR_STATE, e);
         }finally {
             JdbcTool.close(conn,statement,resultSet);
         }
@@ -257,6 +263,29 @@ public class OrderRepository {
             throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_STATE_DIFFERENT, e);
         }finally{
             JdbcTool.close(conn,statement,resultSet);
+        }
+    }
+
+    public List<OrderEntity> getAllByUserId(int userId) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        List<OrderEntity> entities = new ArrayList();
+
+        try{
+            conn= connectionFactory.create();
+            statement = conn.prepareStatement(SELECT_REQUEST+WHERE_USER);
+            statement.setInt(1, userId);
+            resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                entities.add(toEntity(resultSet));
+            }
+
+            return entities;
+        }catch(SQLException | ClassNotFoundException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_REQUEST+WHERE_USER, e);
         }
     }
 }

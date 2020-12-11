@@ -15,6 +15,7 @@ public class UserDTOWrapper {
         dto.setLastname(model.getLastname());
         dto.setPhone(model.getPhone());
         dto.setAddressDTO(addressDTOWrapper.toDTO(model.getAddress()));
+        dto.setRole(model.getRole());
 
         return dto;
     }

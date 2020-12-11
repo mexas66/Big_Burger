@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
   
 
-    <c:if test="${sessionScope.currentuser not empty && sessionScope.currentuser.role != 'ADMIN'}">
+    <c:if test="${not empty sessionScope.currentuser && sessionScope.currentuser.role != 'ADMIN'}">
         <c:redirect url="${pageContext.request.contextPath}/BigBurger.jsp?message=ACCESS_DENIED"/>
     </c:if>
 <!DOCTYPE html>

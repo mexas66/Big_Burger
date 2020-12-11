@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <c:if test="${sessionScope.currentuser not empty && (sessionScope.currentuser.role != 'COOKER' || sessionScope.currentuser.role != 'DELIVERY'}">
+    <c:if test="${empty sessionScope.currentuser}">
         <c:redirect url="${pageContext.request.contextPath}/BigBurger.jsp?message=ACCESS_DENIED"/>
     </c:if>
 
@@ -26,10 +26,10 @@
          <th>Nom et Prénom</th>
          <th>Heure de validation de commande</th>
          <th>Heure théorique de fin de préparation 4</th>
+         <th>Détail</th>
      </thead>
      <tbody>
          <c:forEach items="${requestScope.orderlist}" var="order">
-         <a href="/detail?order_id=${order.id}">
              <tr>
               <td>
                  <c:out value="${order.id}"/>
@@ -43,9 +43,10 @@
                   <td>
                     <c:out value="${order.end}" />
                   </td>
-
+                  <td>
+                      <a href="detail?order_id=${order.id}">Détail</a>
+                  </td>
              </tr>
-             </a>
          </c:forEach>
      </tbody>
  </table>

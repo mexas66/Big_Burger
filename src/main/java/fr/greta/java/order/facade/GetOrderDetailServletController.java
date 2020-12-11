@@ -36,7 +36,7 @@ public class GetOrderDetailServletController extends HttpServlet {
             req.setAttribute("orderDTO", dtoWrapper.toDTO(order));
 
 
-            req.getRequestDispatcher("/Detail.jsp")
+            req.getRequestDispatcher("/TraitementCommande.jsp")
                     .forward(req, resp);
 
         } catch (ServiceException e) {

@@ -17,13 +17,18 @@
 <img src="https://www.gifimili.com/gif/2018/02/hamburger.gif" style="border:solid 5px" width="300" height="300"
      title="LE BURGER CLASSIQUE 6.50€" alt="" class="arrondie">
 
-<c:when test="${sessionScope.currentuser empty}"></c:if>
+
+<c:choose>
+     <c:when test="${empty sessionScope.currentuser}">
+
 <p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous connecter ? </B><a href="PageConnexion.jsp">Page de connexion</a></p>
 <p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous inscrire ? </B><a href="Inscription.jsp">Page d'inscription</a></p>
 </c:when>
 <c:otherwise>
     <p style="font-size:20px;color:#003344"><B>Informations utilisateur   :  </B><a href="user">Menu</a></p>
     <p style="font-size:20px;color:#003344"><B>Souhaitez-vous commander ? </B><a href="menu">Menu</a></p>
+    <p style="font-size:20px;color:#003344"><B>Se déconnecter ?  </B><a href="disconnect">Deconnexion</a></p>
+
     <c:if test="${sessionScope.currentuser.role == 'COOKER' || sessionScope.currentuser.role == 'DELIVERY'}">
         <p style="font-size:20px;color:#003344"><B>Acceder aux commandes à traiter ? </B><a href="orderlist">Commandes à traiter</a></p>
     </c:if>
@@ -32,6 +37,8 @@
 
     </c:if>
 </c:otherwise>
+
+</c:choose>
 
 
 
