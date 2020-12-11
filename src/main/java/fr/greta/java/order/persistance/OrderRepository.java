@@ -20,7 +20,7 @@ public class OrderRepository {
 
     private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state FROM _order";
     private static final String WHERE_ID = "WHERE id = ?";
-    private static final String WHERE_STATE = "WHERE _state = 'VALIDATED'";
+    private static final String WHERE_STATE = "WHERE _state = ?";
     private static final String SELECT_STATE = "SELECT _state FROM _order";
     private static final String WHERE_STATE_DIFFERENT = " WHERE _state <> 'ENDED'";
 
@@ -139,17 +139,25 @@ public class OrderRepository {
         }
     }
 
-    public List<OrderEntity> getToPrepareOrders() throws RepositoryException {
+    public List<OrderEntity> getOrderList(String role) throws RepositoryException {
         Connection conn = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         List<OrderEntity> entities = new ArrayList<>();
+        String stateToGet = "";
+
+        if(role.equals("COOKER")){
+            stateToGet = "'VALIDATED' OR _state = 'PREPARING'";
+        }else if(role.equals("DELIVERY")){
+            stateToGet = "'READY' OR _state = 'DELIVERING'";
+        }
 
         try{
             conn = connectionFactory.create();
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(SELECT_REQUEST+WHERE_STATE);
+            statement = conn.prepareStatement(SELECT_REQUEST+WHERE_STATE);
+            statement.setString(1, stateToGet);
+            resultSet = statement.executeQuery();
 
             while(resultSet.next()){
                 entities.add(toEntity(resultSet));

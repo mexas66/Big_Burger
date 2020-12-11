@@ -24,22 +24,25 @@ public class UserInfoServletController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        User user = (User)session.getAttribute("currentuser");
+        if(session.getAttribute("currentuser") != null) {
+            User user = (User) session.getAttribute("currentuser");
 
-        List<Order> orders = null;
-        try {
-            orders = orderService.getNotEndedOrders();
+            List<Order> orders = null;
+            try {
+                orders = orderService.getNotEndedOrders();
 
 
-            req.setAttribute("orders", orderDTO.toDTOs(orders));
-            req.setAttribute("currentuser", dtoWrapper.toDTO(user));
+                req.setAttribute("orders", orderDTO.toDTOs(orders));
+                req.setAttribute("currentuser", dtoWrapper.toDTO(user));
 
-            req.getRequestDispatcher("/Utilisateur.jsp")
-                    .forward(req, resp);
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            resp.sendRedirect(req.getContextPath()+"/BigBurger.jsp?message=USER_ERROR_MESSAGE");
+                req.getRequestDispatcher("/Utilisateur.jsp")
+                        .forward(req, resp);
+            } catch (ServiceException e) {
+                e.printStackTrace();
+                resp.sendRedirect(req.getContextPath() + "/BigBurger.jsp?message=USER_ERROR_MESSAGE");
+            }
+        }else{
+            resp.sendRedirect(req.getContextPath() + "/BigBurger.jsp?message=USER_ERROR_MESSAGE");
         }
     }
 }
