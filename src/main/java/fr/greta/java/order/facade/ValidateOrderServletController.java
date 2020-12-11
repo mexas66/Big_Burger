@@ -34,8 +34,7 @@ public class ValidateOrderServletController extends HttpServlet {
 
             session.removeAttribute("order");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/user");
-            dispatcher.forward(req, resp);
+            resp.sendRedirect(req.getContextPath()+"/user");
 
         } catch (ServiceException e) {
             e.printStackTrace();

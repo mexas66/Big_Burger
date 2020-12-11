@@ -48,7 +48,7 @@
  </br>
  <th><B>Total = <B/></th>
     <B><c:out value="${orderDTO.total}" />€</B>
-      <button type="submit" style="background-color:#bbd2e1;color:black" name="order" value=${order}><B>Valider Commande</B></button>
+      <button type="submit" style="background-color:#bbd2e1;color:black"><B>Valider Commande</B></button>
 
 </form>
 

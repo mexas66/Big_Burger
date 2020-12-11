@@ -32,7 +32,7 @@
                      <c:out value="${burger.price}" />€
                  </td>
                 <td>
-                    <input type="number" min="0" name="${burger.id}to_add">
+                    <input type="number" min="0" value="0" name="${burger.id}to_add">
                 </td>-
              </tr>
          </c:forEach>
