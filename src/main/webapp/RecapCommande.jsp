@@ -8,7 +8,7 @@
  <head>
      <meta charset="UTF-8">
      <title>RecapCommande</title>
-     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 
  </head>
 
