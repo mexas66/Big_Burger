@@ -10,37 +10,40 @@
 
 </head>
 
-<h4 style="text-align:center;font-family:cursive;font-size:100px;color:#003344">BIG BURGER</h4>
+<body style="background-image: url(https://consequenceofsound.net/wp-content/uploads/2017/04/homer-simpson-feature1.png?resize=807,538); background-size: 100%; background-repeat: no-repeat;">
 
-<body style background="https://i.pinimg.com/originals/58/67/d8/5867d8f8218432be5f16ccefe8c03fd0.jpg">
+<nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
+    <a class="navbar-brand" href="#" style="color: white;">BigBurger</a>
 
-<img src="https://www.gifimili.com/gif/2018/02/hamburger.gif" style="border:solid 5px" width="300" height="300"
-     title="LE BURGER CLASSIQUE 6.50€" alt="" class="arrondie">
-
-
-<c:choose>
+    <div>
+    <c:choose>
      <c:when test="${empty sessionScope.currentuser}">
 
-<p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous connecter ? </B><a href="PageConnexion.jsp">Page de connexion</a></p>
-<p style="font-size:20px;color:#003344"><B>Souhaitez-vous vous inscrire ? </B><a href="Inscription.jsp">Page d'inscription</a></p>
+        <a href="PageConnexion.jsp"><button type="button" class="btn btn-primary">Se connecter</button></a>
+        <a href="Inscription.jsp"><button type="button" class="btn btn-primary">S'inscrire</button></a>
 </c:when>
 <c:otherwise>
-    <p style="font-size:20px;color:#003344"><B>Informations utilisateur   :  </B><a href="user">Menu</a></p>
-    <p style="font-size:20px;color:#003344"><B>Souhaitez-vous commander ? </B><a href="menu">Menu</a></p>
-    <p style="font-size:20px;color:#003344"><B>Se déconnecter ?  </B><a href="disconnect">Deconnexion</a></p>
+    <a href="user"><button type="button" class="btn btn-primary">Infos Utilisateur</button></a>
+    <a href="menu"><button type="button" class="btn btn-primary">Menu</button></a>
+    <a href="disconnect"><button type="button" class="btn btn-primary">Se déconnecter</button></a>
 
     <c:if test="${sessionScope.currentuser.role == 'COOKER' || sessionScope.currentuser.role == 'DELIVERY'}">
-        <p style="font-size:20px;color:#003344"><B>Acceder aux commandes à traiter ? </B><a href="orderlist">Commandes à traiter</a></p>
+        <a href="orderlist"><button type="button" class="btn btn-primary">Commandes à traiter</button></a>
     </c:if>
     <c:if test="${sessionScope.currentuser.role == 'ADMIN'}">
-        <p style="font-size:20px;color:#003344"><B>Souhaitez-vous inscrire un employé ? </B><a href="Inscription.jsp">Page d'inscription</a></p>
+        <a href="Inscription.jsp"><button type="button" class="btn btn-primary">Inscrire un employé</button></a>
 
     </c:if>
 </c:otherwise>
 
 </c:choose>
+</div>
+
+</nav>
 
 
+<img src="https://www.gifimili.com/gif/2018/02/hamburger.gif" style="border:solid 5px" width="300" height="300"
+     title="LE BURGER CLASSIQUE 6.50€" alt="" class="arrondie">
 
 
 </body>

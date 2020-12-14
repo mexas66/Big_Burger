@@ -11,11 +11,15 @@
 </head>
 <body style="background-color:#add8e6">
 
+    <nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
+        <a class="navbar-brand" href="BigBurger.jsp" style="color: white;">BigBurger</a>
+    </nav>
+
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Menu</h4>
 
 
 <form action="recap" method ="post">
- <table>
+ <table class="table">
      <thead>
          <th>Nom du Burger</th>
          <th>Prix</th>
@@ -38,7 +42,7 @@
          </c:forEach>
      </tbody>
  </table>
-<button type="submit" style="background-color:#bbd2e1" name="submit"><B>Ajouter</B></button>
+<button type="submit" class="btn btn-primary" name="submit"><B>Ajouter</B></button>
 
  </form>
 </body>
