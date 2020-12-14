@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Cuisine</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
 </head>
 <body style="background-color:#e6ddb7">
 

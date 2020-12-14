@@ -4,7 +4,6 @@ import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.domain.Order;
 import fr.greta.java.order.domain.OrderService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

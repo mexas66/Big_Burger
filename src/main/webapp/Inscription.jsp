@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
     <script>
 
  </script>
