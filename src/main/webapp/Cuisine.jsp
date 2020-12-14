@@ -16,11 +16,15 @@
 </head>
 <body style="background-color:#e6ddb7">
 
+    <nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
+        <a class="navbar-brand" href="BigBurger.jsp" style="color: white;">BigBurger</a>
+    </nav>
+
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Cuisine</h4>
 
 
 <form action="recap" method ="post">
- <table>
+ <table class="table">
      <thead>
          <th>Numéro de commande</th>
          <th>Nom et Prénom</th>

@@ -15,6 +15,13 @@
 
 </head>
 
+<body>
+
+    <nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
+        <a class="navbar-brand" href="BigBurger.jsp" style="color: white;">BigBurger</a>
+    </nav>
+
+
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Connexion</h4>
 
      <thead>
@@ -22,7 +29,7 @@
      </thead>
      <body style="text-align:center;background-color:#ffffd4">
 
-          <form action="connect" method="post">
+          <form action="connect" method="post" class="form-group">
               <legend style="color:#456802;font-size:30px"><B>Se connecter</B></legend>
               <br/>
               <br/>

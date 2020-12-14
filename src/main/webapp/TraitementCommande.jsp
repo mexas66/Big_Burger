@@ -13,6 +13,11 @@
 
 <body style="background-color:#add8e6">
 
+  <nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
+    <a class="navbar-brand" href="BigBurger.jsp" style="color: white;">BigBurger</a>
+</nav>
+
+
 <h4 style="text-align:center;font-family:cursive;font-size:70px;color:#5b3500">Traitement commande</h4>
 
 

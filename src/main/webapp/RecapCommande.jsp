@@ -14,6 +14,11 @@
 
  <body style="background-color:#d6d6d6">
 
+    <nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
+        <a class="navbar-brand" href="BigBurger.jsp" style="color: white;">BigBurger</a>
+    </nav>
+
+
  <h4 style="text-align:center;font-family:cursive;font-size:50px">RECAPITULATIF</h4>
 
 <form action="validate" method="POST" >
