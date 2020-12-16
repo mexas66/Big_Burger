@@ -1,5 +1,8 @@
 package fr.greta.java.order.facade;
 
+import fr.greta.java.employee.domain.Employee;
+import fr.greta.java.employee.facade.EmployeeDTOWrapper;
+import fr.greta.java.generic.exception.ConverterException;
 import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.domain.Order;
 import fr.greta.java.order.domain.OrderService;
@@ -18,7 +21,7 @@ import java.io.IOException;
 public class GetOrderDetailServletController extends HttpServlet {
     private OrderService service = new OrderService();
     private OrderDTOWrapper dtoWrapper = new OrderDTOWrapper();
-    private UserDTOWrapper userDTOWrapper = new UserDTOWrapper();
+	private EmployeeDTOWrapper employeeDtoWrapper  = new EmployeeDTOWrapper();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,19 +30,18 @@ public class GetOrderDetailServletController extends HttpServlet {
         try {
             Order order = service.findById(Integer.parseInt(req.getParameter("order_id")));
 
-            User user = (User)session.getAttribute("currentuser");
+            Employee employee = (Employee)session.getAttribute("currentemployee");
 
-            if(user != null){
-                req.setAttribute("currentuser", userDTOWrapper.toDTO(user));
+            if(employee != null){
+                req.setAttribute("currentemployee", employeeDtoWrapper.toDTO(employee));
             }
 
             req.setAttribute("orderDTO", dtoWrapper.toDTO(order));
 
-
             req.getRequestDispatcher("/TraitementCommande.jsp")
                     .forward(req, resp);
 
-        } catch (ServiceException e) {
+        } catch (ServiceException | ConverterException e) {
             e.printStackTrace();
             resp.sendRedirect(req.getContextPath()+"/menu?ORDER_REQUEST_ERROR");
 

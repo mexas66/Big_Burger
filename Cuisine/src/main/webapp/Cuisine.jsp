@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <c:if test="${empty sessionScope.currentuser}">
-        <c:redirect url="${pageContext.request.contextPath}/BigBurger.jsp?message=ACCESS_DENIED"/>
+    <c:if test="${empty sessionScope.currentemployee}">
+        <c:redirect url="/BigBurger.jsp?message=ACCESS_DENIED"/>
     </c:if>
 
 <!DOCTYPE html>

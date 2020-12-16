@@ -1,6 +1,7 @@
 package fr.greta.java.order.persistance;
 
 import fr.greta.java.ConnectionFactory;
+import fr.greta.java.employee.domain.EmployeeRole;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
@@ -141,7 +142,7 @@ public class OrderRepository {
         }
     }
 
-    public List<OrderEntity> getOrderList(String role) throws RepositoryException {
+    public List<OrderEntity> getOrderList(EmployeeRole role) throws RepositoryException {
         Connection conn = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -150,10 +151,10 @@ public class OrderRepository {
         String stateToGet1 = "";
         String stateToGet2 = "";
 
-        if(role.equals("COOKER")){
+        if(role.equals(EmployeeRole.COOKER)){
             stateToGet1 = "VALIDATED";
             stateToGet2 = "PREPARING";
-        }else if(role.equals("DELIVERY")){
+        }else if(role.equals(EmployeeRole.DELIVERY)){
             stateToGet1 = "READY";
             stateToGet2 = "DELIVERING";
         }

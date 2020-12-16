@@ -67,4 +67,5 @@ public class UserDTO {
     public void setAdressDTO(AddressDTO addressDTO) {
         this.addressDTO = addressDTO;
     }
+}
 

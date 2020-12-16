@@ -1,5 +1,6 @@
 package fr.greta.java.order.domain;
 
+import fr.greta.java.employee.domain.EmployeeRole;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.persistance.OrderRepository;
@@ -51,7 +52,7 @@ public class OrderService {
         return calendar;
     }
 
-    public List<Order> getOrderList(String role) throws ServiceException {
+    public List<Order> getOrderList(EmployeeRole role) throws ServiceException {
         try {
             return wrapper.fromEntities(repository.getOrderList(role));
         } catch (RepositoryException e) {

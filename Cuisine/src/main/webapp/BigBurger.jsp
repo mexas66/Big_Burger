@@ -17,24 +17,15 @@
 
     <div>
     <c:choose>
-     <c:when test="${empty sessionScope.currentuser}">
+     <c:when test="${empty sessionScope.currentemployee}">
 
         <a href="PageConnexion.jsp"><button type="button" class="btn btn-primary">Se connecter</button></a>
         <a href="Inscription.jsp"><button type="button" class="btn btn-primary">S'inscrire</button></a>
-</c:when>
-<c:otherwise>
-    <a href="user"><button type="button" class="btn btn-primary">Infos Utilisateur</button></a>
-    <a href="menu"><button type="button" class="btn btn-primary">Menu</button></a>
-    <a href="disconnect"><button type="button" class="btn btn-primary">Se déconnecter</button></a>
-
-    <c:if test="${sessionScope.currentuser.role == 'COOKER' || sessionScope.currentuser.role == 'DELIVERY'}">
-        <a href="orderlist"><button type="button" class="btn btn-primary">Commandes à traiter</button></a>
-    </c:if>
-    <c:if test="${sessionScope.currentuser.role == 'ADMIN'}">
-        <a href="Inscription.jsp"><button type="button" class="btn btn-primary">Inscrire un employé</button></a>
-
-    </c:if>
-</c:otherwise>
+	</c:when>
+	<c:otherwise>
+    	<a href="disconnect"><button type="button" class="btn btn-primary">Se déconnecter</button></a>
+    	<a href="employeeorderlist"><button type="button" class="btn btn-primary">Commandes à traiter</button></a>
+	</c:otherwise>
 
 </c:choose>
 </div>

@@ -1,9 +1,10 @@
 package fr.greta.java.order.facade;
 
+import fr.greta.java.employee.domain.Employee;
+import fr.greta.java.employee.facade.EmployeeDTOWrapper;
 import fr.greta.java.generic.exception.ServiceException;
 import fr.greta.java.order.domain.Order;
 import fr.greta.java.order.domain.OrderService;
-import fr.greta.java.user.domain.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,30 +15,31 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/orderlist")
+@WebServlet(urlPatterns = "/employeeorderlist")
 public class GetOrderListServletController extends HttpServlet {
     private OrderService service = new OrderService();
     private OrderDTOWrapper dtoWrapper = new OrderDTOWrapper();
+    private EmployeeDTOWrapper employeeDtoWrapper = new EmployeeDTOWrapper(); 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        User user = (User)session.getAttribute("currentuser");
+        Employee employee = (Employee)session.getAttribute("currentemployee");
         try {
-            if(user != null && (user.getRole().equals("COOKER") || user.getRole().equals("DELIVERY"))) {
+            if(employee != null) {
 
-                List<Order> orders = service.getOrderList(user.getRole());
+                List<Order> orders = service.getOrderList(employee.getRole());
                 req.setAttribute("orderlist", dtoWrapper.toDTOs(orders));
 
                 req.getRequestDispatcher("/Cuisine.jsp")
                         .forward(req, resp);
             }else{
-                resp.sendRedirect(req.getContextPath()+"BigBurger.jsp?message=ACCESS_DENIED");
+                resp.sendRedirect("/BigBurger.jsp?message=ACCESS_DENIED");
             }
-        } catch (ServiceException e) {
+        }catch (ServiceException e) {
             e.printStackTrace();
-            resp.sendRedirect(req.getContextPath()+"/menu?ORDER_REQUEST_ERROR");
+            resp.sendRedirect("/BigBurger.jsp?ORDER_REQUEST_ERROR");
         }
     }
 }

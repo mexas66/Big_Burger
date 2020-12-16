@@ -64,8 +64,9 @@
       </tbody>
     </table>
 
+
 <c:choose>
-    <c:when test="${requestScope.currentuser.role == 'COOKER'}">
+    <c:when test="${requestScope.currentemployee.role == 'COOKER'}">
       <c:if test="${orderDTO.state == 'VALIDATED' || orderDTO.state == 'PREPARING'}">
 
         <a href="next?order_id=${orderDTO.id}"> <input type="button" value="Suivant"> </a>
@@ -77,7 +78,7 @@
 
 
 
-<c:when test="${requestScope.currentuser.role == 'DELIVERY'}">
+<c:when test="${requestScope.currentemployee.role == 'DELIVERY'}">
 
 <c:if test="${orderDTO.state == 'READY' || orderDTO.state == 'DELIVERING'}">
 

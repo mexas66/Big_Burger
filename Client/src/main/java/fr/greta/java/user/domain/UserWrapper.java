@@ -17,7 +17,7 @@ public class UserWrapper {
         model.setLastname(entity.getLastname());
         model.setPassword(entity.getPassword());
         model.setPhone(entity.getPhone());
-        model.setRole(entity.getRole());
+
 
         Address address = addressService.findById(entity.getAddress_id());
         model.setAddress(address);
@@ -35,7 +35,6 @@ public class UserWrapper {
         entity.setEmail(model.getEmail());
         entity.setPhone(model.getPhone());
         entity.setAddress_id(model.getAddress().getId());
-        entity.setRole(model.getRole());
 
         return entity;
     }

@@ -19,7 +19,7 @@ public class RegisterEmployeeServletController extends HttpServlet {
         Employee employee = new Employee();
 
         try {
-            employee.setRole(service.toRole(req.getParameter("role")));
+            employee.setRole(req.getParameter("role")));
             employee.setFirstname(req.getParameter("firstname"));
             employee.setLastname(req.getParameter("lastname"));
             employee.setPhone(req.getParameter("phone"));
