@@ -14,7 +14,7 @@ public class UserRepository {
     private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     private static final String INSERT_REQUEST = "INSERT into _user(_email, _password, _firstname, _lastname, _phone, address_id)"+
-            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            " VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_REQUEST = "SELECT id, _email, _firstname, _lastname, _phone, address_id, _password FROM _user";
     private static final String WHERE_ID = " WHERE id = ?";
     private static final String WHERE_EMAIL_PASSWORD=" WHERE _email = ? AND _password = ?";
