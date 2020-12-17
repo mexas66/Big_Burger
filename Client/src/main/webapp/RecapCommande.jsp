@@ -9,6 +9,8 @@
      <meta charset="UTF-8">
      <title>RecapCommande</title>
      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+         <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+     
 
  </head>
 
@@ -51,7 +53,8 @@
 
  </table>
  </br>
- <th><B>Total = <B/></th>
+ <B>Type de livraison : <c:out value="${orderDTO.type}"/></B>
+ <B>Total = <B/></th>
     <B><c:out value="${orderDTO.total}" />€</B>
       <button type="submit" style="background-color:#bbd2e1;color:black"><B>Valider Commande</B></button>
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/connect")
+@WebServlet(urlPatterns = "/userconnect")
 public class ConnectUserServletController extends HttpServlet {
 
     UserService service = new UserService();

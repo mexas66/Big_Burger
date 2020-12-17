@@ -14,6 +14,7 @@ public class Order {
     private Calendar end;
     private double total;
     private String state;
+    private OrderType type;
 
     public int getId() {
         return id;
@@ -70,4 +71,14 @@ public class Order {
     public void setState(String state) {
         this.state = state;
     }
+
+	public OrderType getType() {
+		return type;
+	}
+
+	public void setType(OrderType type) {
+		this.type = type;
+	}
+    
+    
 }

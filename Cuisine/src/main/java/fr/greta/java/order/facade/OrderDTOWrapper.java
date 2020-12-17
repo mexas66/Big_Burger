@@ -3,6 +3,7 @@ package fr.greta.java.order.facade;
 import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.facade.BurgerDTO;
 import fr.greta.java.burger.facade.BurgerDTOWrapper;
+import fr.greta.java.generic.tools.OrderTypeConverter;
 import fr.greta.java.order.domain.Order;
 import fr.greta.java.user.facade.UserDTOWrapper;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 public class OrderDTOWrapper {
     private BurgerDTOWrapper burgerDTOWrapper = new BurgerDTOWrapper();
     private UserDTOWrapper userDTOWrapper = new UserDTOWrapper();
+    private OrderTypeConverter converter = new OrderTypeConverter();
 
     public OrderDTO toDTO(Order model){
         OrderDTO dto = new OrderDTO();
@@ -39,6 +41,7 @@ public class OrderDTOWrapper {
 
         dto.setState(model.getState());
         dto.setBurgerDTOs(burgersDTO);
+        dto.setType(converter.fromType(model.getType()));
 
         return dto;
     }

@@ -24,7 +24,7 @@ public class ValidateOrderServletController extends HttpServlet {
         Order order = (Order)session.getAttribute("order");
 
         order.setBeginning(Calendar.getInstance());
-        order.setEnd(service.setEndTime(Calendar.getInstance()));
+        order.setEnd(service.setEndTime(Calendar.getInstance(), order.getType()));
 
         order.setState("VALIDATED");
 

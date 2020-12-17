@@ -12,6 +12,8 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    
 
 </head>
 
@@ -29,7 +31,7 @@
      </thead>
      <body style="text-align:center;background-color:#ffffd4">
 
-          <form action="connect" method="post" class="form-group">
+          <form action="employeeconnect" method="post" class="form-group">
               <legend style="color:#456802;font-size:30px"><B>Se connecter</B></legend>
               <br/>
               <br/>
@@ -41,12 +43,12 @@
                <br/>
               <label for="password"><B>Mot de passe</B></label>
               <br/>
-              <input id="password" name="password" type="text" required/>
+              <input id="password" name="password" type="password" required/>
               <br/>
               <br/>
               <br/>
 
-              <button type="submit" style="background-color:#bbd2e1;color:black" name="submit"><B>Valider</B></button>
+              <button type="submit" class="btn btn-primary" name="submit"><B>Valider</B></button>
 
           </form>
      </tbody>

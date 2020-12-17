@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Traitement commande</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 
 </head>
 
@@ -37,8 +38,9 @@
         <p>Date de validation:<c:out value="${orderDTO.beginning}" /></p>
         <p>Date théorique de fin:<c:out value="${orderDTO.end}" /></p>
         <p>Etat commande:<c:out value="${orderDTO.state}" /></p>
+        <p>Type de retrait: <c:out value="${orderDTO.type}"/></p>
 
-          <table>
+          <table class="table">
 
 <thead>
          <th>Nom du Burger</th>
@@ -69,7 +71,7 @@
     <c:when test="${requestScope.currentemployee.role == 'COOKER'}">
       <c:if test="${orderDTO.state == 'VALIDATED' || orderDTO.state == 'PREPARING'}">
 
-        <a href="next?order_id=${orderDTO.id}"> <input type="button" value="Suivant"> </a>
+<a href="next?order_id=${orderDTO.id}"> <button type="button" class="btn btn-primary">Suivant</button> </a>
 
       </c:if>
 
@@ -82,7 +84,7 @@
 
 <c:if test="${orderDTO.state == 'READY' || orderDTO.state == 'DELIVERING'}">
 
-<a href="next?order_id=${orderDTO.id}"> <input type="button" value="Suivant"> </a>
+<a href="next?order_id=${orderDTO.id}"> <button type="button" class="btn btn-primary">Suivant</button> </a>
 
 
 </c:if>

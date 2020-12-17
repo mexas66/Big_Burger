@@ -12,6 +12,7 @@ public class OrderEntity {
     private Timestamp end;
     private double total;
     private String state;
+    private String type;
 
     public int getId() {
         return id;
@@ -68,4 +69,22 @@ public class OrderEntity {
     public void setState(String state) {
         this.state = state;
     }
+
+	public Map<Integer, Integer> getBurgers_id() {
+		return burgers_id;
+	}
+
+	public void setBurgers_id(Map<Integer, Integer> burgers_id) {
+		this.burgers_id = burgers_id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+    
+    
 }

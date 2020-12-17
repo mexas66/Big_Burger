@@ -27,7 +27,6 @@ public class GetOrderHistoricServletController extends HttpServlet {
         try {
             if (user != null) {
                 List<Order> orders = service.getAllByUserId(user.getId());
-
                 req.setAttribute("orderlist", dtoWrapper.toDTOs(orders));
 
                 req.getRequestDispatcher("/Cuisine.jsp")

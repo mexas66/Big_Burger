@@ -14,11 +14,11 @@ public class OrderRepository {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total, _state) " +
-            "VALUES(?, ?, ?, ?, ?)";
+    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total, _state, _type) " +
+            "VALUES(?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_STATE= "UPDATE _order SET _state = ?";
 
-    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state FROM _order";
+    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state, _type FROM _order";
     private static final String WHERE_ID = " WHERE id = ?";
     private static final String WHERE_STATE = " WHERE _state = ?";
     private static final String WHERE_USER=" WHERE user_id = ?";
@@ -46,6 +46,7 @@ public class OrderRepository {
             statement.setTimestamp(3, entity.getEnd());
             statement.setDouble(4, entity.getTotal());
             statement.setString(5, entity.getState());
+            statement.setString(6, entity.getType());
             statement.executeUpdate();
 
             resultSet = statement.getGeneratedKeys();
@@ -108,6 +109,7 @@ public class OrderRepository {
         entity.setUser_id(resultSet.getInt("user_id"));
         entity.setTotal(resultSet.getDouble("_total"));
         entity.setState(resultSet.getString("_state"));
+        entity.setType(resultSet.getString("_type"));
 
         return entity;
     }

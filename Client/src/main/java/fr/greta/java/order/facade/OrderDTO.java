@@ -15,6 +15,7 @@ public class OrderDTO {
     private Date end;
     private double total;
     private String state;
+    private String type;
 
     public Map<BurgerDTO, Integer> getBurgerDTOs() {
         return burgerDTOs;
@@ -71,4 +72,14 @@ public class OrderDTO {
     public void setState(String _state) {
         this.state = _state;
     }
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+    
+    
 }

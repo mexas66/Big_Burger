@@ -1,8 +1,10 @@
 package fr.greta.java.order.domain;
 
 import fr.greta.java.employee.domain.EmployeeRole;
+import fr.greta.java.generic.exception.ConverterException;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.exception.ServiceException;
+import fr.greta.java.generic.tools.RoleConverter;
 import fr.greta.java.order.persistance.OrderRepository;
 
 import java.util.Calendar;
@@ -13,6 +15,7 @@ public class OrderService {
 
     private OrderWrapper wrapper;
     private OrderRepository repository;
+    private RoleConverter converter = new RoleConverter();
 
     public OrderService(OrderWrapper wrapper, OrderRepository repository) {
         this.wrapper = wrapper;
@@ -54,8 +57,8 @@ public class OrderService {
 
     public List<Order> getOrderList(EmployeeRole role) throws ServiceException {
         try {
-            return wrapper.fromEntities(repository.getOrderList(role));
-        } catch (RepositoryException e) {
+            return wrapper.fromEntities(repository.getOrderList(converter.fromRole(role)));
+        } catch (RepositoryException | ConverterException e) {
             throw new ServiceException(e);
         }
     }

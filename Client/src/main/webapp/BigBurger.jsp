@@ -7,13 +7,15 @@
     <meta charset="UTF-8">
     <title>BIG BURGER</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    
 
 </head>
 
-<body style="background-image: url(https://consequenceofsound.net/wp-content/uploads/2017/04/homer-simpson-feature1.png?resize=807,538); background-size: 100%; background-repeat: no-repeat;">
+<body>
 
-<nav class="navbar navbar-light" style="background-color: rgb(255, 129, 129);">
-    <a class="navbar-brand" href="#" style="color: white;">BigBurger</a>
+<nav class="navbar navbar-light">
+    <a class="navbar-brand" href="#">BigBurger</a>
 
     <div>
     <c:choose>
@@ -35,9 +37,19 @@
 </nav>
 
 
-<img src="https://www.gifimili.com/gif/2018/02/hamburger.gif" style="border:solid 5px" width="300" height="300"
-     title="LE BURGER CLASSIQUE 6.50€" alt="" class="arrondie">
-
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://burgermix.files.wordpress.com/2016/02/burgergraffiti.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://i.ytimg.com/vi/Bzqwv3nNR3o/maxresdefault.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://4.bp.blogspot.com/-WVzYH2H3J6s/UMSl4rvWF_I/AAAAAAAAseI/otJJO_4UiTc/s1600/IMG_3656.JPG" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
 
 </body>
 

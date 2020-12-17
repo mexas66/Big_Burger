@@ -12,6 +12,8 @@
     <meta charset="UTF-8">
     <title>Cuisine</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    
 
 </head>
 <body style="background-color:#e6ddb7">
@@ -30,6 +32,7 @@
          <th>Nom et Prénom</th>
          <th>Heure de validation de commande</th>
          <th>Heure théorique de fin de préparation 4</th>
+         <th>Type de retrait</th>
          <th>Détail</th>
      </thead>
      <tbody>
@@ -46,6 +49,9 @@
                  </td>
                   <td>
                     <c:out value="${order.end}" />
+                  </td>
+                  <td>
+                  	<c:out value="${order.type}"/>
                   </td>
                   <td>
                       <a href="detail?order_id=${order.id}">Détail</a>

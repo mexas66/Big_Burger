@@ -1,7 +1,6 @@
 package fr.greta.java.order.persistance;
 
 import fr.greta.java.ConnectionFactory;
-import fr.greta.java.employee.domain.EmployeeRole;
 import fr.greta.java.generic.exception.RepositoryException;
 import fr.greta.java.generic.tools.JdbcTool;
 
@@ -15,16 +14,17 @@ public class OrderRepository {
 
     ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total, _state) " +
-            "VALUES(?, ?, ?, ?, ?)";
+    private static final String INSERT_INTO = "INSERT INTO _order (user_id, _beginning, _end, _total, _state, _type) " +
+            "VALUES(?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_STATE= "UPDATE _order SET _state = ?";
 
-    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state FROM _order";
+    private static final String SELECT_REQUEST = "SELECT id, user_id, _beginning, _end, _total, _state, _type FROM _order";
     private static final String WHERE_ID = " WHERE id = ?";
     private static final String WHERE_STATE = " WHERE _state = ?";
     private static final String WHERE_USER=" WHERE user_id = ?";
     private static final String OR_STATE = " OR _state = ?";
     private static final String SELECT_STATE = "SELECT _state FROM _order";
+    private static final String SELECT_TYPE = "SELECT _type FROM _order";
     private static final String WHERE_STATE_DIFFERENT = " WHERE _state <> 'ENDED' AND user_id = ?";
 
     private static final String SELECT_REQUEST_ORDER_ITEMS = "SELECT burger_id, _quantity FROM _order_items WHERE order_id =  ?";
@@ -47,6 +47,7 @@ public class OrderRepository {
             statement.setTimestamp(3, entity.getEnd());
             statement.setDouble(4, entity.getTotal());
             statement.setString(5, entity.getState());
+            statement.setString(6, entity.getType());
             statement.executeUpdate();
 
             resultSet = statement.getGeneratedKeys();
@@ -109,6 +110,7 @@ public class OrderRepository {
         entity.setUser_id(resultSet.getInt("user_id"));
         entity.setTotal(resultSet.getDouble("_total"));
         entity.setState(resultSet.getString("_state"));
+        entity.setType(resultSet.getString("_type"));
 
         return entity;
     }
@@ -142,7 +144,7 @@ public class OrderRepository {
         }
     }
 
-    public List<OrderEntity> getOrderList(EmployeeRole role) throws RepositoryException {
+    public List<OrderEntity> getOrderList(String role) throws RepositoryException {
         Connection conn = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -151,10 +153,10 @@ public class OrderRepository {
         String stateToGet1 = "";
         String stateToGet2 = "";
 
-        if(role.equals(EmployeeRole.COOKER)){
+        if(role.equals("COOKER")){
             stateToGet1 = "VALIDATED";
             stateToGet2 = "PREPARING";
-        }else if(role.equals(EmployeeRole.DELIVERY)){
+        }else if(role.equals("DELIVERY")){
             stateToGet1 = "READY";
             stateToGet2 = "DELIVERING";
         }
@@ -185,10 +187,11 @@ public class OrderRepository {
 
         try {
             String formerState = getState(order_id);
+            String orderType = getType(order_id);
 
             conn= connectionFactory.create();
             statement = conn.prepareStatement(UPDATE_STATE+WHERE_ID);
-            statement.setString(1, newState(formerState));
+            statement.setString(1, newState(formerState, orderType));
             statement.setInt(2, order_id);
             statement.executeUpdate();
 
@@ -225,12 +228,39 @@ public class OrderRepository {
             JdbcTool.close(conn,statement,resultSet);
         }
     }
+    
+    private String getType(int order_id) throws RepositoryException {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-    private String newState(String formerState) throws RepositoryException {
+        try{
+            conn = connectionFactory.create();
+            statement = conn.prepareStatement(SELECT_TYPE+WHERE_ID);
+            statement.setInt(1, order_id);
+            resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                return resultSet.getString("_type");
+            }else{
+                throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_TYPE+WHERE_ID);
+            }
+        }catch (SQLException | ClassNotFoundException e){
+            throw new RepositoryException("Erreur lors de l'execution de la requete: "+SELECT_TYPE+WHERE_ID, e);
+
+        }finally {
+            JdbcTool.close(conn,statement,resultSet);
+        }
+    }
+
+    private String newState(String formerState, String orderType) throws RepositoryException {
         switch(formerState){
             case "VALIDATED":
                 return "PREPARING";
             case "PREPARING":
+                if(orderType.equals("CLICK & COLLECT")) {
+                	return "ENDED";
+                }
                 return "READY";
             case "READY":
                 return "DELIVERING";

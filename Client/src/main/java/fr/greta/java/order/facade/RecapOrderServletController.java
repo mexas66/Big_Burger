@@ -3,6 +3,7 @@ package fr.greta.java.order.facade;
 import fr.greta.java.burger.domain.Burger;
 import fr.greta.java.burger.domain.BurgerService;
 import fr.greta.java.generic.exception.ServiceException;
+import fr.greta.java.generic.tools.OrderTypeConverter;
 import fr.greta.java.order.domain.Order;
 import fr.greta.java.user.domain.User;
 
@@ -25,6 +26,7 @@ public class RecapOrderServletController extends HttpServlet {
     private BurgerService burgerService = new BurgerService();
 
     private OrderDTOWrapper dtoWrapper = new OrderDTOWrapper();
+    private OrderTypeConverter converter = new OrderTypeConverter();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +42,7 @@ public class RecapOrderServletController extends HttpServlet {
             order.setTotal(0);
             order.setUser((User)session.getAttribute("currentuser"));
             order.setBurgers(new HashMap<Burger, Integer>());
+            order.setType(converter.toType(req.getParameter("type")));
 
             for(Burger burger: burgers){
                 quantity = Integer.parseInt(req.getParameter(valueOf(burger.getId())+"to_add"));
